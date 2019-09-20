@@ -1,7 +1,7 @@
 {
   "version": 2,
   "routes": [
-    { "src": "(.*\\..*)", "dest": "$1" },
-    { "src": ".*", "dest": "/index.html" }
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
   ]
 }
