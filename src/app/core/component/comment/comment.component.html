@@ -6,6 +6,6 @@
   <form (ngSubmit)="sendComment()" *ngIf="staticSessionService.login && !isCommentWait" class="mr-0 mr-md-auto">
     <input #input [(ngModel)]="comment" class="send" name="comment" placeholder="Enterキーでコメントを送信" type="text" autofocus autocomplete="false">
   </form>
-  <input *ngIf="!staticSessionService.login" class="send" disabled placeholder="ログインしていていないためコメントできません" type="text">
+  <input *ngIf="!staticSessionService.login" class="send" disabled placeholder="ログインしていないためコメントできません" type="text">
   <input *ngIf="isCommentWait" class="send" disabled placeholder="コメントを送信しました" type="text">
 </div>
