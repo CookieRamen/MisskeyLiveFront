@@ -39,7 +39,6 @@ const routes: Routes = [
   },
   {
     path: 'v',
-    canActivate: [AuthGuard],
     loadChildren: () => import('./video/video.module').then(m => m.VideoModule)
   },
   {
