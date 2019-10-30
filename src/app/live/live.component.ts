@@ -13,6 +13,7 @@ export interface Data {
 }
 
 interface ArchiveList {
+  user: string;
   id: string;
   title: string;
   timestamp: string;

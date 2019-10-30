@@ -4,6 +4,7 @@ import {IndexComponent} from './index.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {LiveInfoCardComponent} from '../core/component/cards/live-info-card/live-info-card.component';
+import { ArchiveInfoCardComponent } from '../core/component/cards/archive-info-card/archive-info-card.component';
 
 describe('IndexComponent', () => {
   let component: IndexComponent;
@@ -15,7 +16,7 @@ describe('IndexComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
       ],
-      declarations: [IndexComponent, LiveInfoCardComponent]
+      declarations: [IndexComponent, LiveInfoCardComponent, ArchiveInfoCardComponent]
     }).compileComponents();
   }));
 

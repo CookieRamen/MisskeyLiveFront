@@ -1,13 +1,29 @@
-<div class="container min-vh-100 d-flex justify-content-center">
-  <div class="container">
-    <h1>現在配信中</h1>
-    <div class="card-columns">
+<div class="container" *ngIf="liveInfo.length > 0">
+  <div class="row">
+    <h1 class="col-12">現在配信中</h1>
+    <div class="card-columns col-12">
       <ng-template ngFor let-data [ngForOf]="liveInfo">
         <app-live-info-card
           [title]="data.title"
           [url]="'/@' + data.username"
           [username]="data.username"
           [thumbnail]="apiUrl + '/public/thumbnails/' + data.username + '.jpg?v=' + cacheVersion"></app-live-info-card>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="archiveInfo.length > 0">
+  <div class="row">
+    <h1 class="col-12">過去のアーカイブ</h1>
+    <div class="card-columns col-12">
+      <ng-template ngFor let-data [ngForOf]="archiveInfo">
+        <app-archive-info-card
+          [id]="data.id"
+          [title]="data.title"
+          [username]="data.user"
+          [duration]="data.duration"
+          [thumbnail]="data.thumbnail"></app-archive-info-card>
       </ng-template>
     </div>
   </div>
