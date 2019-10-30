@@ -1,0 +1,15 @@
+<a [routerLink]="'/v/' + id">
+  <div class="card">
+    <div class="embed-responsive embed-responsive-16by9">
+      <img [src]="thumbnail"
+           alt="image"
+           class="card-img-top embed-responsive-item"
+           draggable="false"
+      />
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ title }}</h5>
+      <p class="text-white m-0">@{{username}}</p>
+    </div>
+  </div>
+</a>
