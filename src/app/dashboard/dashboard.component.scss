@@ -1,23 +1,38 @@
-.archives {
-  max-height: 500px;
-  overflow-y: auto;
-}
+.container-fluid {
+  height: calc(100vh - 64px);
+  overflow: hidden;
 
-.btn-public {
-  padding: 5px;
-  border: 0 !important;
-}
-
-.public-label, .btn-public {
-  text-align: center;
-  font-weight: bold;
-  color: #fff;
-
-  &.public {
-    background-color: #4CAF50 !important;
+  .sidebar-base {
+    background-image: linear-gradient(45deg, #ff4242, #007bff);
+    padding: 0;
   }
 
-  &.private {
-    background-color: #C62828 !important;
+  .main-content {
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+  }
+}
+
+.dashboard-nav {
+  .toc-link {
+    padding: 10px;
+    margin: 5px 0 5px 16px;
+    border-radius: 5px 0 0 5px;
+    user-select: none !important;
+    cursor: pointer;
+
+    & > a {
+      color: #fff !important;
+    }
+
+    &.active {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &:hover:not(.active) {
+      background-color: rgba(255, 255, 255, 0.025);
+    }
   }
 }

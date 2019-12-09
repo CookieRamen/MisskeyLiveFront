@@ -1,0 +1,93 @@
+<swal
+  #updated
+  title="情報を更新しました"
+  type="success"
+  [showConfirmButton]="false"
+  timer="1000">
+</swal>
+
+<div class="container-fluid py-3">
+  <div class="row">
+    <div class="col-xl-6 mb-4">
+      <div class="card bg-dark text-white">
+        <h5 class="card-header">配信プレビュー</h5>
+        <div class="card-body bg-dark p-0">
+          <div class="embed-responsive embed-responsive-16by9">
+            <ng-template [ngIf]="online">
+              <iframe [src]="video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </ng-template>
+            <ng-template [ngIf]="!online">
+              <img class="embed-responsive-item" src="https://s3.arkjp.net/live/offline.jpg" draggable="false" alt="Offline">
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-6 mb-4">
+      <div class="card bg-dark text-white">
+        <h5 class="card-header">配信設定</h5>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="title">配信タイトル (最大30文字)</label>
+            <input #title type="text" class="form-control" id="title" maxlength="30" [value]="userData?.title"
+                   placeholder="例）初配信 コイン積みします">
+          </div>
+          <div class="form-group">
+            <label for="desc">配信説明 (最大300文字)</label>
+            <textarea #desc id="desc" class="form-control" [value]="userData?.description"
+                      placeholder="例）暇なのでコイン積む配信します。" rows="5" maxlength="300"></textarea>
+          </div>
+          <button class="btn btn-primary" (click)="updateData()">更新</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-6 mb-4">
+      <div class="card bg-dark text-white">
+        <h5 class="card-header">配信先</h5>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="rtmp">RTMP URL</label>
+            <div class="input-group mb-3">
+              <input id="rtmp" class="form-control" type="text"
+                     [value]="'rtmp://rtmp-'+ userData?.server + '.arkjp.net/live'" readonly>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" ngxClipboard
+                        [cbContent]="'rtmp://rtmp-'+ userData?.server + '.arkjp.net/live'">コピー
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="streamkey">ストリームキー</label>
+            <div class="input-group mb-3">
+              <input id="streamkey" class="form-control" type="password" value="みたな？ここにはストリームキーなんて書いてないのだよ" readonly>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" ngxClipboard
+                        [cbContent]="userName + '?token=' + userData?.live_token">コピー
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="view">視聴用URL</label>
+            <div class="input-group mb-3">
+              <input id="view" class="form-control" type="text"
+                     [value]="'https://live.misskey.io/@'+ userName" readonly>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" ngxClipboard
+                        [cbContent]="'https://live.misskey.io/@'+ userName">コピー
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

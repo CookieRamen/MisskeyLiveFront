@@ -1,10 +1,14 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {DashboardComponent} from './dashboard.component';
-import {HttpClientModule} from '@angular/common/http';
-import {ClipboardModule} from 'ngx-clipboard';
-import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
-import {RouterTestingModule} from '@angular/router/testing';
+import { DashboardComponent } from './dashboard.component';
+import { ClipboardModule } from 'ngx-clipboard';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NgbCollapseModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { GridModule } from '@syncfusion/ej2-angular-grids';
+import { OrderModule } from 'ngx-order-pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -14,9 +18,14 @@ describe('DashboardComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         ClipboardModule,
         SweetAlert2Module.forRoot(),
+        NgbCollapseModule,
+        GridModule,
+        OrderModule,
+        FontAwesomeModule,
+        NgbTooltipModule
       ],
       declarations: [DashboardComponent]
     }).compileComponents();
