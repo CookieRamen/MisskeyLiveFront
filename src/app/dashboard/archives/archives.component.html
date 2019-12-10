@@ -1,0 +1,66 @@
+<swal
+  #LockError
+  title="削除ロックの上限を超えています"
+  type="error"
+  [showConfirmButton]="false"
+  timer="1000">
+</swal>
+
+<div class="container-fluid my-3">
+  <ng-template [ngIf]="archives.length === 0">
+    <h4>まだ配信が行われていません</h4>
+  </ng-template>
+
+  <ng-template [ngIf]="archives.length != 0">
+    <h4 class="mb-3">配信履歴</h4>
+    <div class="row">
+      <ng-template ngFor let-data [ngForOf]="archives | orderBy: timestamp">
+        <div class="col-6 col-sm-4 col-lg-3 col-xl-2 mb-3">
+          <div class="card bg-transparent">
+            <div class="thumbnail-box" [routerLink]="'/v/' + data.id">
+              <img [src]="data.thumbnail" class="card-img-top" alt="...">
+              <div class="labels">
+                <ng-template [ngIf]="data.public === 0">
+                  <p class="public-label bg-danger">非公開</p>
+                </ng-template>
+                <ng-template [ngIf]="data.public === 1">
+                  <p class="public-label bg-primary">公開</p>
+                </ng-template>
+              </div>
+              <p class="duration">{{data.duration * 1000 | date: 'HH:mm:ss' : 'UTC'}}</p>
+            </div>
+            <div class="card-body">
+              <a class="card-title" [routerLink]="'/v/' + data.id">{{data.title}}</a>
+              <p class="card-text">{{data.timestamp | date: 'yyyy年MM月dd日 HH:mm' : '+1800'}}</p>
+            </div>
+            <div class="card-footer">
+              <ng-template [ngIf]="data.lock === 0">
+                <button class="btn btn-sm btn-secondary" (click)="updateLockStatus(data.id, true)"
+                        placement="top" ngbTooltip="削除ロック">
+                  <fa-icon [icon]="faUnlock"></fa-icon>
+                </button>
+              </ng-template>
+              <ng-template [ngIf]="data.lock === 1">
+                <button class="btn btn-sm btn-warning" (click)="updateLockStatus(data.id, false)"
+                        placement="top" ngbTooltip="削除ロック解除">
+                  <fa-icon [icon]="faLock"></fa-icon>
+                </button>
+              </ng-template>
+
+              <ng-template [ngIf]="data.public === 0">
+                <button class="btn btn-sm btn-primary" (click)="data.public = 1;updatePublicStatus(data.id, true)">
+                  公開する
+                </button>
+              </ng-template>
+              <ng-template [ngIf]="data.public === 1">
+                <button class="btn btn-sm btn-danger" (click)="data.public = 0;updatePublicStatus(data.id, false)">
+                  非公開にする
+                </button>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </ng-template>
+</div>
