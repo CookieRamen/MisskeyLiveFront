@@ -1,129 +1,29 @@
-<swal
-  #updated
-  title="情報を更新しました"
-  type="success"
-  [showConfirmButton]="false"
-  timer="1000">
-</swal>
-
-<div class="container-fluid py-3">
-  <div class="row">
-    <div class="col-xl-6 mb-4">
-      <div class="card bg-dark text-white">
-        <h5 class="card-header">配信プレビュー</h5>
-        <div class="card-body bg-dark p-0">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe [src]="video" allowfullscreen></iframe>
+<div class="container-fluid dashboard">
+  <div class="row flex-xl-nowrap h-100">
+    <div class="col-12 col-lg-2 sidebar-base">
+      <div class="d-lg-none d-flex py-2 px-4 align-items-center text-body sidebar-collapsed" role="button"
+           (click)="isMenuCollapsed = !isMenuCollapsed"><span class="mr-auto">Menu</span>
+        <button aria-controls="doc-nav" class="btn btn-link p-0">
+          <svg class="align-middle" focusable="false" height="30" viewBox="0 0 30 30" width="30"
+               xmlns="http://www.w3.org/2000/svg"><title>Menu</title>
+            <path d="M4 7h22M4 15h22M4 23h22" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="d-lg-block my-3 collapse sidebar" id="doc-nav" [ngbCollapse]="isMenuCollapsed">
+        <nav class="toc">
+          <div class="toc-item mb-4">
+            <ul class="nav flex-column dashboard-nav">
+              <li class="toc-link" routerLink="/dashboard/index" routerLinkActive="active">ダッシュボード</li>
+              <!-- todo: <li class="toc-link" routerLink="/dashboard/settings" routerLinkActive="active">配信設定</li> -->
+              <li class="toc-link" routerLink="/dashboard/archives" routerLinkActive="active">アーカイブ</li>
+            </ul>
           </div>
-        </div>
+        </nav>
       </div>
     </div>
-
-
-    <div class="col-xl-3 col-lg-6 mb-4">
-      <div class="card bg-dark text-white">
-        <h5 class="card-header">配信履歴</h5>
-        <div class="card-body archives">
-          <ng-template [ngIf]="archiveData.length === 0">
-            <div class="archive">
-              <p>まだ配信が行われていません</p>
-            </div>
-          </ng-template>
-          <ng-template ngFor let-data [ngForOf]="archiveData">
-            <div class="archive row">
-              <div class="col-3">
-                <a [routerLink]="'/v/' + data.id" target="_blank" rel="noopener">
-                  <img class="mt-3 pointer" [src]="data.thumbnail" width="100%">
-                </a>
-                <ng-template [ngIf]="data.public === 0">
-                  <p class="public-label private">非公開</p>
-                </ng-template>
-                <ng-template [ngIf]="data.public === 1">
-                  <p class="public-label public">公開</p>
-                </ng-template>
-              </div>
-              <div class="col-9">
-                <a class="m-0 font-weight-bold pointer" [routerLink]="'/v/' + data.id" target="_blank" rel="noopener">{{data.title}}</a>
-                <p class="m-0">{{data.duration * 1000 | date: 'HH:mm:ss' : 'UTC'}}</p>
-                <p class="m-0">{{data.timestamp | date: 'yyyy年MM月dd日 HH:mm' : '+1800'}}</p>
-                <ng-template [ngIf]="data.public === 0">
-                  <button class="btn-public public" (click)="data.public = 1;updatePublicStatus(data.id, true)">公開する</button>
-                </ng-template>
-                <ng-template [ngIf]="data.public === 1">
-                  <button class="btn-public private" (click)="data.public = 0;updatePublicStatus(data.id, false)">非公開にする</button>
-                </ng-template>
-
-              </div>
-            </div>
-          </ng-template>
-        </div>
-      </div>
+    <div class="col-12 col-lg-10 main-content">
+      <router-outlet></router-outlet>
     </div>
-
-    <div class="col-xl-3 col-lg-6 mb-4">
-      <div class="card bg-dark text-white">
-        <h5 class="card-header">配信設定</h5>
-        <div class="card-body">
-          <div class="form-group">
-            <label for="title">配信タイトル (最大30文字)</label>
-            <input #title type="text" class="form-control" id="title" maxlength="30" [value]="userData?.title"
-                   placeholder="例）初配信 コイン積みします">
-          </div>
-          <div class="form-group">
-            <label for="desc">配信説明 (最大300文字)</label>
-            <textarea #desc id="desc" class="form-control" [value]="userData?.description"
-                      placeholder="例）暇なのでコイン積む配信します。" rows="5" maxlength="300"></textarea>
-          </div>
-          <button class="btn btn-primary" (click)="updateData()">更新</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xl-3 col-lg-6 mb-4">
-      <div class="card bg-dark text-white">
-        <h5 class="card-header">配信先</h5>
-        <div class="card-body">
-          <div class="form-group">
-            <label for="rtmp">RTMP URL</label>
-            <div class="input-group mb-3">
-              <input id="rtmp" class="form-control" type="text"
-                     [value]="'rtmp://rtmp-'+ userData?.server + '.arkjp.net/live'" readonly>
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" ngxClipboard
-                        [cbContent]="'rtmp://rtmp-'+ userData?.server + '.arkjp.net/live'">コピー
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="streamkey">ストリームキー</label>
-            <div class="input-group mb-3">
-              <input id="streamkey" class="form-control" type="password" value="みたな？ここにはストリームキーなんて書いてないのだよ" readonly>
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" ngxClipboard
-                        [cbContent]="userName + '?token=' + userData?.live_token">コピー
-                </button>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="form-group">
-            <label for="view">視聴用URL</label>
-            <div class="input-group mb-3">
-              <input id="view" class="form-control" type="text"
-                     [value]="'https://live.misskey.io/@'+ userName" readonly>
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" ngxClipboard
-                        [cbContent]="'https://live.misskey.io/@'+ userName">コピー
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
