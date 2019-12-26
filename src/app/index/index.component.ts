@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import { OgpService } from '../services/ogp.service';
 
 interface LiveInfo {
   username: string;
@@ -16,6 +17,7 @@ interface ArchiveInfo {
   duration: number;
 }
 
+
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -28,7 +30,8 @@ export class IndexComponent implements OnInit {
   cacheVersion: number;
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private ogpService: OgpService,
   ) {
   }
 
@@ -42,6 +45,13 @@ export class IndexComponent implements OnInit {
     this.httpClient.get<ArchiveInfo[]>(`${this.apiUrl}/api/archives/index`)
       .subscribe(data => {
         this.archiveInfo = data;
-      })
+      });
+
+    this.ogpService.setMetaTag({
+      title: 'MisskeyLive',
+      desc: '分散マイクロブログSNS Misskey.io の生放送サービス！ 無料で高画質な配信ができる!',
+      type: 'website',
+      img: 'https://s3.arkjp.net/live/ogp-default.png'
+    });
   }
 }

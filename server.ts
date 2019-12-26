@@ -14,7 +14,7 @@
  * from your application's main.server.ts file, as seen below with the
  * import for `ngExpressEngine`.
  */
-
+(global as any).XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 import 'zone.js/dist/zone-node';
 
 import * as express from 'express';
@@ -49,6 +49,7 @@ app.get('*.*', express.static(DIST_FOLDER, {
 
 // All regular routes use the Universal engine
 app.get('*', (req, res) => {
+  req.originalUrl = req.originalUrl.replace(req.baseUrl, '');
   res.render('index', { req });
 });
 

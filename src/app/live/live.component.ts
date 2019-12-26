@@ -1,8 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
+import { OgpService } from '../services/ogp.service';
+import { isPlatformBrowser } from '@angular/common';
 
 export interface Data {
   status: string;
@@ -35,8 +37,15 @@ export class LiveComponent implements OnInit, OnDestroy {
   failCount = 0;
   archiveData: ArchiveList[] = [];
   checkIntervalId: number;
+  isBrowser = isPlatformBrowser(this.platformId);
 
-  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private httpClient: HttpClient) {
+  constructor(
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute,
+    private httpClient: HttpClient,
+    private ogpService: OgpService,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {
   }
 
   ngOnInit() {
@@ -64,11 +73,14 @@ export class LiveComponent implements OnInit, OnDestroy {
     this.video = this.sanitizer.bypassSecurityTrustResourceUrl(`${environment.api}/embed/${this.userId}`);
 
     // load user data
+    const intervalId = setInterval(() => {}, 100);
     this.httpClient.get<Data>(`${environment.api}/api/data/${this.userId}`).subscribe(data => {
       if (data.status === 'OK') {
         this.userData = data;
-        this.liveCheck();
-        this.checkIntervalId = window.setInterval(() => this.liveCheck(), 5000);
+        if (this.isBrowser) {
+          this.liveCheck();
+          this.checkIntervalId = window.setInterval(() => this.liveCheck(), 5000);
+        }
       } else {
         this.userData = {
           status: data.status,
@@ -76,6 +88,14 @@ export class LiveComponent implements OnInit, OnDestroy {
           description: data.message
         };
       }
+
+      this.ogpService.setMetaTag({
+        title: this.userData.title + ' - MisskeyLive',
+        desc: this.userData.description,
+        img: environment.api + '/public/thumbnails/' + this.userId + '.jpg?v=' + Math.floor((new Date().getTime() - 15000) / 60000),
+        type: 'article'
+      });
+      clearInterval(intervalId);
     });
   }
 
