@@ -9,9 +9,10 @@ module.exports = {
     // This is our Express server for Dynamic universal
     server: './server.ts'
   },
-  externals: {
-    './dist/server/main': 'require("./server/main")'
-  },
+  externals: [
+    // Firebase has some troubles being webpacked when it's in the Node environment, so we will skip it.
+    /^firebase/
+  ],
   target: 'node',
   resolve: { extensions: ['.ts', '.js'] },
   optimization: {
@@ -20,7 +21,10 @@ module.exports = {
   output: {
     // Puts the output at the root of the dist folder
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js'
+    // Export a UMD of the webpacked server.ts & dependencies for rendering in Cloud Functions
+    library: 'app',
+    libraryTarget: 'umd',
+    filename: '[name].js',
   },
   module: {
     noParse: /polyfills-.*\.js/,
