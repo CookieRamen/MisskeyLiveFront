@@ -1,51 +1,54 @@
-<div class="row no-gutters live">
-  <div class="col-sm-12 col-xl-9 col-lg-8 live-app">
-    <div class="embed-responsive embed-responsive-16by9">
-      <ng-template [ngIf]="online">
-        <iframe [src]="video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </ng-template>
-      <ng-template [ngIf]="!online">
-        <img class="embed-responsive-item" src="https://s3.arkjp.net/live/offline.jpg" draggable="false" alt="Offline">
-      </ng-template>
-    </div>
-    <div class="container-fluid mt-1">
-      <h4>{{ userData?.title }}</h4>
-      <p class="description">{{ userData?.description }}</p>
-    </div>
-    <div class="container-fluid my-3" *ngIf="archiveData.length != 0">
-      <h4>{{userId}} の過去の配信</h4>
-      <div class="card-columns">
-        <ng-template ngFor let-data [ngForOf]="archiveData">
-          <a [routerLink]="'/v/' + data.id">
-            <div class="card">
-              <div class="embed-responsive embed-responsive-16by9">
-                <img [src]="data.thumbnail"
-                     alt="image"
-                     class="card-img-top embed-responsive-item"
-                     onerror="this.src = 'https://s3.arkjp.net/live/thumb-404.jpg'"
-                     draggable="false"
-                />
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">{{ data.title }}</h5>
-                <p class="text-white m-0">{{data.duration * 1000 | date: 'HH:mm:ss' : 'UTC'}}</p>
-                <p class="text-white m-0">{{data.timestamp | date: 'yyyy年MM月dd日 HH:mm' : '+1800'}}</p>
-              </div>
-            </div>
-          </a>
+<ng-template [ngIf]="isBrowser">
+  <div class="row no-gutters live">
+    <div class="col-sm-12 col-xl-9 col-lg-8 live-app">
+      <div class="embed-responsive embed-responsive-16by9">
+        <ng-template [ngIf]="online">
+          <iframe [src]="video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </ng-template>
+        <ng-template [ngIf]="!online">
+          <img class="embed-responsive-item" src="https://s3.arkjp.net/live/offline.jpg" draggable="false"
+               alt="Offline">
         </ng-template>
       </div>
+      <div class="container-fluid mt-1">
+        <h4>{{ userData?.title }}</h4>
+        <p class="description">{{ userData?.description }}</p>
+      </div>
+      <div class="container-fluid my-3" *ngIf="archiveData.length != 0">
+        <h4>{{userId}} の過去の配信</h4>
+        <div class="card-columns">
+          <ng-template ngFor let-data [ngForOf]="archiveData">
+            <a [routerLink]="'/v/' + data.id">
+              <div class="card">
+                <div class="embed-responsive embed-responsive-16by9">
+                  <img [src]="data.thumbnail"
+                       alt="image"
+                       class="card-img-top embed-responsive-item"
+                       onerror="this.src = 'https://s3.arkjp.net/live/thumb-404.jpg'"
+                       draggable="false"
+                  />
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ data.title }}</h5>
+                  <p class="text-white m-0">{{data.duration * 1000 | date: 'HH:mm:ss' : 'UTC'}}</p>
+                  <p class="text-white m-0">{{data.timestamp | date: 'yyyy年MM月dd日 HH:mm' : '+1800'}}</p>
+                </div>
+              </div>
+            </a>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-xl-3 col-lg-4 h-100 comments">
+      <div class="btn btn-secondary popup-button" (click)="popupChat()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path
+            d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+            fill="#fff"/>
+        </svg>
+      </div>
+      <app-comment [userId]="userId"></app-comment>
     </div>
   </div>
-  <div class="col-sm-12 col-xl-3 col-lg-4 h-100 comments">
-    <div class="btn btn-secondary popup-button" (click)="popupChat()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-        <path d="M0 0h24v24H0z" fill="none"/>
-        <path
-          d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-          fill="#fff"/>
-      </svg>
-    </div>
-    <app-comment [userId]="userId"></app-comment>
-  </div>
-</div>
+</ng-template>
