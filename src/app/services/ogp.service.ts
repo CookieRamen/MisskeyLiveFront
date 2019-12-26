@@ -25,7 +25,6 @@ export class OgpService {
     this.metaService.updateTag({ property: 'og:title', content: data.title });
     this.metaService.updateTag({ property: 'og:description', content: data.desc });
     this.metaService.updateTag({ property: 'og:type', content: data.type });
-    this.metaService.updateTag({ property: 'og:url', content: ''});
     this.metaService.updateTag({ property: 'og:image', content: data.img });
     this.metaService.updateTag({ property: 'twitter:card', content: 'summary' });
   }
