@@ -55,15 +55,15 @@ export class LivenowComponent implements OnInit, OnDestroy {
   }
 
   async setupDesktop() {
-    this.isDesktop = true;
     // @ts-ignore
     this.stream = await navigator.mediaDevices.getDisplayMedia({video: true, audio: true});
+    this.isDesktop = true;
     await this.setupMic();
   }
 
   async setupCamera() {
-    this.isDesktop = false;
     this.stream = await navigator.mediaDevices.getUserMedia({video: true});
+    this.isDesktop = false;
     await this.setupMic();
   }
 
