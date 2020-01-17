@@ -38,7 +38,7 @@ export class LivenowComponent implements OnInit, OnDestroy {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    if (!('getDisplayMedia' in navigator.mediaDevices) || !('MediaRecorder' in window)) {
+    if (!('getUserMedia' in navigator.mediaDevices) || !('MediaRecorder' in window)) {
       this.supportBrowser = false;
       return;
     }
