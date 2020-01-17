@@ -44,9 +44,9 @@
     <button class="btn btn-success mr-2" *ngIf="recorder === null && isDesktop" (click)="setupDesktop()">共有範囲を変更</button>
     <button class="btn btn-secondary mr-2" *ngIf="recorder != null && isDesktop" (click)="shareError.fire()">共有範囲を変更</button>
 
-    <button class="btn btn-success mr-2" *ngIf="recorder === null && stream != null" (click)="start()">配信開始</button>
-    <button class="btn btn-success mr-2" *ngIf="stream == null" (click)="selectError.fire()">配信開始</button>
-    <button class="btn btn-secondary mr-2" *ngIf="recorder != null" (click)="stop()">配信停止</button>
+    <button class="btn btn-danger mr-2" *ngIf="recorder === null && stream != null" (click)="start()">配信開始</button>
+    <button class="btn btn-secondary mr-2" *ngIf="stream == null" (click)="selectError.fire()">配信開始</button>
+    <button class="btn btn-danger mr-2" *ngIf="recorder != null" (click)="stop()">配信停止</button>
 
   </div>
 </ng-template>
