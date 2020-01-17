@@ -117,6 +117,9 @@ export class LivenowComponent implements OnInit, OnDestroy {
   }
 
   stop() {
+    if (this.recorder === null) {
+      return;
+    }
     this.recorder.stop();
     this.recorder = null;
   }
