@@ -13,13 +13,15 @@ import { SettingsComponent } from './settings/settings.component';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { OrderModule } from 'ngx-order-pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LivenowComponent } from './livenow/livenow.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     IndexComponent,
     ArchivesComponent,
-    SettingsComponent
+    SettingsComponent,
+    LivenowComponent
   ],
   imports: [
     CommonModule,

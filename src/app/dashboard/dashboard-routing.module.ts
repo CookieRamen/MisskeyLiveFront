@@ -4,6 +4,7 @@ import {DashboardComponent} from './dashboard.component';
 import { IndexComponent } from './index/index.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ArchivesComponent } from './archives/archives.component';
+import { LivenowComponent } from './livenow/livenow.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,9 @@ const routes: Routes = [
       }, {
         path: 'archives',
         component: ArchivesComponent
+      }, {
+        path: 'livenow',
+        component: LivenowComponent
       }, {
         path: '**',
         redirectTo: 'index',
