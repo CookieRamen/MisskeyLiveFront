@@ -46,7 +46,11 @@ export class LivenowComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.server = data.server;
         this.streamKey = data.live_token;
-        this.setupDesktop();
+        if ('getDisplayMedia' in navigator.mediaDevices) {
+          this.setupDesktop();
+        } else {
+          this.setupCamera();
+        }
       });
   }
 
