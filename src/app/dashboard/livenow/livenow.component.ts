@@ -26,6 +26,7 @@ export class LivenowComponent implements OnInit, OnDestroy {
   isMicMute = false;
   isDesktopMute = false;
   isPreviewMute = true;
+  isDesktop = true;
 
   faMicrophone = faMicrophone;
   faMicrophoneSlash = faMicrophoneSlash;
@@ -45,7 +46,7 @@ export class LivenowComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.server = data.server;
         this.streamKey = data.live_token;
-        this.setup();
+        this.setupDesktop();
       });
   }
 
@@ -53,9 +54,20 @@ export class LivenowComponent implements OnInit, OnDestroy {
     this.stop();
   }
 
-  async setup() {
+  async setupDesktop() {
+    this.isDesktop = true;
     // @ts-ignore
     this.stream = await navigator.mediaDevices.getDisplayMedia({video: true, audio: true});
+    await this.setupMic();
+  }
+
+  async setupCamera() {
+    this.isDesktop = false;
+    this.stream = await navigator.mediaDevices.getUserMedia({video: true});
+    await this.setupMic();
+  }
+
+  async setupMic() {
     this.isDesktopMute = false;
     try {
       this.mics = (await navigator.mediaDevices.getUserMedia({audio: true})).getAudioTracks();
@@ -73,8 +85,10 @@ export class LivenowComponent implements OnInit, OnDestroy {
   }
 
   toggleDesktopMute() {
-    this.isDesktopMute = this.isDesktopMute === false;
-    this.muteDesktop(this.isDesktopMute);
+    if (this.isDesktop) {
+      this.isDesktopMute = this.isDesktopMute === false;
+      this.muteDesktop(this.isDesktopMute);
+    }
   }
 
   muteMic(mute: boolean) {
@@ -82,7 +96,9 @@ export class LivenowComponent implements OnInit, OnDestroy {
   }
 
   muteDesktop(mute: boolean) {
-    this.stream.getAudioTracks().filter(track => !this.mics.includes(track)).forEach(track => this.mute(track.id, mute));
+    if (this.isDesktop) {
+      this.stream.getAudioTracks().filter(track => !this.mics.includes(track)).forEach(track => this.mute(track.id, mute));
+    }
   }
 
   mute(trackId: string, mute: boolean) {

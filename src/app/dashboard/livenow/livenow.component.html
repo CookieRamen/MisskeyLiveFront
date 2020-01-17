@@ -22,7 +22,7 @@
                       [class.btn-light]="!isMicMute" (click)="toggleMicMute()">
                 <fa-icon [icon]="isMicMute ? faMicrophoneSlash : faMicrophone"></fa-icon>
               </button>
-              <button class="btn btn-mute" ngbTooltip="デスクトップ音声ミュート" [class.btn-danger]="isDesktopMute"
+              <button *ngIf="isDesktop" class="btn btn-mute" ngbTooltip="デスクトップ音声ミュート" [class.btn-danger]="isDesktopMute"
                       [class.btn-light]="!isDesktopMute" (click)="toggleDesktopMute()">
                 <fa-icon [icon]="isDesktopMute ? faVolumeMute : faVolumeUp"></fa-icon>
               </button>
@@ -36,8 +36,13 @@
       </div>
     </div>
 
-    <button class="btn btn-success mr-2" *ngIf="recorder === null" (click)="setup()">共有範囲を変更</button>
-    <button class="btn btn-secondary mr-2" *ngIf="recorder != null" (click)="shareError.fire()">共有範囲を変更</button>
+    <button class="btn btn-success mr-2" *ngIf="recorder === null && isDesktop" (click)="setupCamera()">カメラで配信</button>
+    <button class="btn btn-secondary mr-2" *ngIf="recorder != null && isDesktop" (click)="shareError.fire()">カメラで配信</button>
+    <button class="btn btn-success mr-2" *ngIf="recorder === null && !isDesktop" (click)="setupDesktop()">デスクトップを共有</button>
+    <button class="btn btn-secondary mr-2" *ngIf="recorder != null && !isDesktop" (click)="shareError.fire()">デスクトップを共有</button>
+
+    <button class="btn btn-success mr-2" *ngIf="recorder === null && isDesktop" (click)="setupDesktop()">共有範囲を変更</button>
+    <button class="btn btn-secondary mr-2" *ngIf="recorder != null && isDesktop" (click)="shareError.fire()">共有範囲を変更</button>
 
     <button class="btn btn-success mr-2" *ngIf="recorder === null && stream != null" (click)="start()">配信開始</button>
     <button class="btn btn-success mr-2" *ngIf="stream == null" (click)="selectError.fire()">配信開始</button>
