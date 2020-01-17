@@ -38,7 +38,7 @@ export class LivenowComponent implements OnInit, OnDestroy {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    if (!('getDisplayMedia' in navigator.mediaDevices) || !('MediaRecorder' in window)) {
+    if (!('getUserMedia' in navigator.mediaDevices) || !('MediaRecorder' in window)) {
       this.supportBrowser = false;
       return;
     }
@@ -46,7 +46,11 @@ export class LivenowComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.server = data.server;
         this.streamKey = data.live_token;
-        this.setupDesktop();
+        if ('getDisplayMedia' in navigator.mediaDevices) {
+          this.setupDesktop();
+        } else {
+          this.setupCamera();
+        }
       });
   }
 
