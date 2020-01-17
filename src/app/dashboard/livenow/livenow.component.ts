@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as io from 'socket.io-client';
 import {environment} from '../../../environments/environment';
 import {SessionService} from '../../core/service/session.service';
 import {HttpClient} from '@angular/common/http';
+import { faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons/faMicrophoneSlash';
+import { faMicrophone } from '@fortawesome/free-solid-svg-icons/faMicrophone';
+import { faVolumeUp } from '@fortawesome/free-solid-svg-icons/faVolumeUp';
+import { faVolumeMute } from '@fortawesome/free-solid-svg-icons/faVolumeMute';
+import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons/faEyeSlash';
 
 @Component({
   selector: 'app-livenow',
   templateUrl: './livenow.component.html',
   styleUrls: ['./livenow.component.scss']
 })
-export class LivenowComponent implements OnInit {
+export class LivenowComponent implements OnInit, OnDestroy {
 
   supportBrowser = true;
   server: string;
@@ -17,6 +23,16 @@ export class LivenowComponent implements OnInit {
   stream: MediaStream;
   mics: MediaStreamTrack[];
   recorder = null;
+  isMicMute = false;
+  isDesktopMute = false;
+  isPreviewMute = true;
+
+  faMicrophone = faMicrophone;
+  faMicrophoneSlash = faMicrophoneSlash;
+  faVolumeUp = faVolumeUp;
+  faVolumeMute = faVolumeMute;
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -33,16 +49,32 @@ export class LivenowComponent implements OnInit {
       });
   }
 
+  ngOnDestroy() {
+    this.stop();
+  }
+
   async setup() {
     // @ts-ignore
     this.stream = await navigator.mediaDevices.getDisplayMedia({video: true, audio: true});
+    this.isDesktopMute = false;
     try {
       this.mics = (await navigator.mediaDevices.getUserMedia({audio: true})).getAudioTracks();
       this.mics.forEach(mic => {
-        mic.enabled = false;
+        mic.enabled = true;
         this.stream.addTrack(mic);
       });
+      this.isMicMute = false;
     } catch (e) {}
+  }
+
+  toggleMicMute() {
+    this.isMicMute = this.isMicMute === false;
+    this.muteMic(this.isMicMute);
+  }
+
+  toggleDesktopMute() {
+    this.isDesktopMute = this.isDesktopMute === false;
+    this.muteDesktop(this.isDesktopMute);
   }
 
   muteMic(mute: boolean) {
@@ -64,7 +96,7 @@ export class LivenowComponent implements OnInit {
     this.recorder = new MediaRecorder(this.stream);
     this.recorder.ondataavailable = e => socket.emit('video', e.data);
     this.recorder.onstop = socket.close.bind(socket);
-    socket.on('stop', stop.bind(this));
+    socket.on('stop', this.stop.bind(this));
     this.recorder.start(0);
   }
 

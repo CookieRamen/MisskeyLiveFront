@@ -1,2 +1,47 @@
-<p>livenow works!</p>
-<video [srcObject]="stream"></video>
+<swal #shareError title="共有範囲を変更するには配信を停止してください" type="error" [showConfirmButton]="false" timer="3000"></swal>
+<swal #selectError title="配信を開始する前に共有範囲を選択してください" type="error" [showConfirmButton]="false" timer="3000"></swal>
+
+<ng-template [ngIf]="!supportBrowser">
+  <h1>申し訳ございませんが、サポートされていないブラウザのようです。</h1>
+  <p>Google Chrome等のChromium系ブラウザをご利用ください。</p>
+</ng-template>
+
+<ng-template [ngIf]="supportBrowser">
+  <div class="container-fluid py-3">
+    <h4>配信開始後、ページを移動すると配信が止まってしまいますのでご注意ください。</h4>
+    <div class="row">
+      <div class="col-xl-9 mb-4">
+        <div class="card bg-dark text-white">
+          <h5 class="card-header">配信プレビュー</h5>
+          <div class="card-body bg-dark p-0">
+            <div class="embed-responsive embed-responsive-16by9">
+              <video class="embed-responsive-item" [muted]="isPreviewMute" [srcObject]="stream" autoplay></video>
+            </div>
+            <div class="mute-overlay">
+              <button class="btn btn-mute" ngbTooltip="マイク音声ミュート" [class.btn-danger]="isMicMute"
+                      [class.btn-light]="!isMicMute" (click)="toggleMicMute()">
+                <fa-icon [icon]="isMicMute ? faMicrophoneSlash : faMicrophone"></fa-icon>
+              </button>
+              <button class="btn btn-mute" ngbTooltip="デスクトップ音声ミュート" [class.btn-danger]="isDesktopMute"
+                      [class.btn-light]="!isDesktopMute" (click)="toggleDesktopMute()">
+                <fa-icon [icon]="isDesktopMute ? faVolumeMute : faVolumeUp"></fa-icon>
+              </button>
+              <button class="btn btn-mute" ngbTooltip="プレビュー音声ミュート" [class.btn-danger]="isPreviewMute"
+                      [class.btn-light]="!isPreviewMute" (click)="isPreviewMute = !isPreviewMute">
+                <fa-icon [icon]="isPreviewMute ? faEyeSlash : faEye"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-success mr-2" *ngIf="recorder === null" (click)="setup()">共有範囲を変更</button>
+    <button class="btn btn-secondary mr-2" *ngIf="recorder != null" (click)="shareError.fire()">共有範囲を変更</button>
+
+    <button class="btn btn-success mr-2" *ngIf="recorder === null && stream != null" (click)="start()">配信開始</button>
+    <button class="btn btn-success mr-2" *ngIf="stream == null" (click)="selectError.fire()">配信開始</button>
+    <button class="btn btn-secondary mr-2" *ngIf="recorder != null" (click)="stop()">配信停止</button>
+
+  </div>
+</ng-template>
