@@ -90,7 +90,7 @@ export class CommentComponent implements OnInit {
     this.httpClient.get<any>(`${environment.api}/api/data/${this.userId}`).subscribe(data => {
       this.ngMode = data.ng_mode;
       this.ngReplace = data.ng_replace;
-      this.ngList.push(data.ng_list);
+      this.ngList.push(...data.ng_list);
     })
   }
 
