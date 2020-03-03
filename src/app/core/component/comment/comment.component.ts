@@ -4,6 +4,7 @@ import {SessionService} from '../../service/session.service';
 import {default as twemoji} from 'twemoji';
 import {ActivatedRoute} from '@angular/router';
 import {faVolumeMute, faVolumeUp} from '@fortawesome/free-solid-svg-icons';
+import {environment} from '../../../../environments/environment';
 
 interface MisskeyEmoji {
   name: string;
@@ -44,6 +45,9 @@ export class CommentComponent implements OnInit {
   comment: string;
   isCommentWait = false;
   emojis: Map<string, string> = new Map();
+  ngMode: number;
+  ngReplace: string;
+  ngList: string[] = [];
 
   constructor(private httpClient: HttpClient, private route: ActivatedRoute) { }
 
@@ -65,6 +69,7 @@ export class CommentComponent implements OnInit {
 
   init() {
     this.initCustomEmoji();
+    this.initNgComments();
     this.fetchOldComments();
     this.wsInit();
   }
@@ -79,6 +84,14 @@ export class CommentComponent implements OnInit {
 
   convertEmojiToHtml(emoji: MisskeyEmoji) {
     return `<img class="emoji" draggable="false" src="${emoji.url}" alt="${emoji.name}">`;
+  }
+
+  initNgComments() {
+    this.httpClient.get<any>(`${environment.api}/api/data/${this.userId}`).subscribe(data => {
+      this.ngMode = data.ng_mode;
+      this.ngReplace = data.ng_replace;
+      this.ngList.push(...data.ng_list);
+    })
   }
 
   wsInit() {
@@ -128,6 +141,12 @@ export class CommentComponent implements OnInit {
   addComment(note: MisskeyNote, bouyomi: boolean) {
     if (!note.text) {
       return;
+    }
+    if (this.ngMode === 1 && this.ngList.filter(ng => note.text.includes(ng)).length > 0) {
+      return;
+    }
+    if (this.ngMode === 2) {
+      this.ngList.forEach(ng => note.text = note.text.split(ng).join(this.ngReplace));
     }
     const text = note.text
       .replace(`#ML${this.userId}`, '')
@@ -198,6 +217,12 @@ export class CommentComponent implements OnInit {
     this.comment = this.comment.trim();
     if (!this.comment) {
       return;
+    }
+    if (this.ngMode === 1 && this.ngList.filter(ng => this.comment.includes(ng)).length > 0) {
+      return;
+    }
+    if (this.ngMode === 2) {
+      this.ngList.forEach(ng => this.comment = this.comment.split(ng).join(this.ngReplace));
     }
     this.isCommentWait = true;
     setTimeout(() => {
