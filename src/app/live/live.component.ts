@@ -39,6 +39,7 @@ export class LiveComponent implements OnInit, OnDestroy {
   archiveData: ArchiveList[] = [];
   checkIntervalId: number;
   isBrowser = isPlatformBrowser(this.platformId);
+  countIntervalId: number;
   count: number;
 
   constructor(
@@ -68,6 +69,9 @@ export class LiveComponent implements OnInit, OnDestroy {
     if (this.checkIntervalId !== undefined) {
       clearInterval(this.checkIntervalId);
     }
+    if (this.countIntervalId !== undefined) {
+      clearInterval(this.countIntervalId);
+    }
   }
 
   playerInit() {
@@ -82,11 +86,10 @@ export class LiveComponent implements OnInit, OnDestroy {
         if (this.isBrowser) {
           this.liveCheck();
           this.checkIntervalId = window.setInterval(() => this.liveCheck(), 5000);
-
-          const socket = io(`https://livenow-${data.server}.arkjp.net`);
-          socket.on('count', count => this.count = count);
-          socket.emit('count', this.userId);
-          setInterval(() => socket.emit('count', this.userId), 15000);
+          this.countIntervalId = window.setInterval(() => {
+            this.httpClient.get<any>(`https://livenow-${data.server}.arkjp.net/?id=${this.userId}`)
+              .subscribe(count => this.count = count.count);
+          }, 15000);
         }
       } else {
         this.userData = {
