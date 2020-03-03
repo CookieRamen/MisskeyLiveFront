@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import { OgpService } from '../services/ogp.service';
 import { isPlatformBrowser } from '@angular/common';
+import * as io from 'socket.io-client';
 
 export interface Data {
   status: string;
@@ -38,6 +39,7 @@ export class LiveComponent implements OnInit, OnDestroy {
   archiveData: ArchiveList[] = [];
   checkIntervalId: number;
   isBrowser = isPlatformBrowser(this.platformId);
+  count: number;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -80,6 +82,11 @@ export class LiveComponent implements OnInit, OnDestroy {
         if (this.isBrowser) {
           this.liveCheck();
           this.checkIntervalId = window.setInterval(() => this.liveCheck(), 5000);
+
+          const socket = io(`https://livenow-${data.server}.arkjp.net`);
+          socket.on('count', count => this.count = count);
+          socket.emit('count', this.userId);
+          setInterval(() => socket.emit('count', this.userId), 15000);
         }
       } else {
         this.userData = {
