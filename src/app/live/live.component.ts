@@ -5,7 +5,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import { OgpService } from '../services/ogp.service';
 import { isPlatformBrowser } from '@angular/common';
-import * as io from 'socket.io-client';
+import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
 
 export interface Data {
   status: string;
@@ -41,6 +41,7 @@ export class LiveComponent implements OnInit, OnDestroy {
   isBrowser = isPlatformBrowser(this.platformId);
   countIntervalId: number;
   count: number;
+  faEye = faEye;
 
   constructor(
     private sanitizer: DomSanitizer,
