@@ -86,10 +86,8 @@ export class LiveComponent implements OnInit, OnDestroy {
         if (this.isBrowser) {
           this.liveCheck();
           this.checkIntervalId = window.setInterval(() => this.liveCheck(), 5000);
-          this.countIntervalId = window.setInterval(() => {
-            this.httpClient.get<any>(`https://livenow-${data.server}.arkjp.net/?id=${this.userId}`)
-              .subscribe(count => this.count = count.count);
-          }, 15000);
+          this.fetchCount();
+          this.countIntervalId = window.setInterval(() => this.fetchCount(), 15000);
         }
       } else {
         this.userData = {
@@ -128,6 +126,11 @@ export class LiveComponent implements OnInit, OnDestroy {
           this.failCount = 0;
         }
       });
+  }
+
+  fetchCount() {
+    this.httpClient.get<any>(`https://livenow-${this.userData.server}.arkjp.net/?id=${this.userId}`)
+      .subscribe(count => this.count = count.count);
   }
 
   popupChat() {
