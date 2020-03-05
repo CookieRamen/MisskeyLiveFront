@@ -9,6 +9,7 @@ import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { OrderModule } from 'ngx-order-pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FooterModule } from '../core/component/footer/footer.module';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -25,7 +26,8 @@ describe('DashboardComponent', () => {
         GridModule,
         OrderModule,
         FontAwesomeModule,
-        NgbTooltipModule
+        NgbTooltipModule,
+        FooterModule,
       ],
       declarations: [DashboardComponent]
     }).compileComponents();

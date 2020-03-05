@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   isMenuCollapsed = true;
+  year: number;
 
   ngOnInit() {
-
+    this.year = new Date().getFullYear();
   }
 }

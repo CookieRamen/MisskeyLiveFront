@@ -14,6 +14,7 @@ import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { OrderModule } from 'ngx-order-pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LivenowComponent } from './livenow/livenow.component';
+import { FooterModule } from '../core/component/footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LivenowComponent } from './livenow/livenow.component';
     GridModule,
     OrderModule,
     FontAwesomeModule,
-    NgbTooltipModule
+    NgbTooltipModule,
+    FooterModule,
   ]
 })
 export class DashboardModule {
