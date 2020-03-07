@@ -12,6 +12,7 @@
       </div>
       <div class="container-fluid mt-1">
         <h4>{{ userData?.title }}</h4>
+        <p class="m-0"><a [href]="'https://misskey.io/@' + userId" target="_blank">{{userId}}</a></p>
         <p class="description">{{ userData?.description }}</p>
       </div>
       <div class="container-fluid my-3" *ngIf="archiveData.length != 0">
