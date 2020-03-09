@@ -5,6 +5,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientModule} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {CommentModule} from '../core/component/comment/comment.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterModule } from '../core/component/footer/footer.module';
 
 describe('LiveComponent', () => {
@@ -14,7 +15,13 @@ describe('LiveComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LiveComponent],
-      imports: [RouterTestingModule, HttpClientModule, CommentModule, FooterModule],
+      imports: [
+        RouterTestingModule,
+        HttpClientModule,
+        CommentModule,
+        FontAwesomeModule,
+        FooterModule,
+      ],
       providers: [CookieService]
     }).compileComponents();
   }));

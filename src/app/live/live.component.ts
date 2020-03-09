@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import { OgpService } from '../services/ogp.service';
 import { isPlatformBrowser } from '@angular/common';
+import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
 
 export interface Data {
   status: string;
@@ -38,6 +39,9 @@ export class LiveComponent implements OnInit, OnDestroy {
   archiveData: ArchiveList[] = [];
   checkIntervalId: number;
   isBrowser = isPlatformBrowser(this.platformId);
+  countIntervalId: number;
+  count: number;
+  faEye = faEye;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -66,6 +70,9 @@ export class LiveComponent implements OnInit, OnDestroy {
     if (this.checkIntervalId !== undefined) {
       clearInterval(this.checkIntervalId);
     }
+    if (this.countIntervalId !== undefined) {
+      clearInterval(this.countIntervalId);
+    }
   }
 
   playerInit() {
@@ -80,6 +87,8 @@ export class LiveComponent implements OnInit, OnDestroy {
         if (this.isBrowser) {
           this.liveCheck();
           this.checkIntervalId = window.setInterval(() => this.liveCheck(), 5000);
+          this.fetchCount();
+          this.countIntervalId = window.setInterval(() => this.fetchCount(), 15000);
         }
       } else {
         this.userData = {
@@ -118,6 +127,11 @@ export class LiveComponent implements OnInit, OnDestroy {
           this.failCount = 0;
         }
       });
+  }
+
+  fetchCount() {
+    this.httpClient.get<any>(`https://livenow-${this.userData.server}.arkjp.net/?id=${this.userId}`)
+      .subscribe(count => this.count = count.count);
   }
 
   popupChat() {
