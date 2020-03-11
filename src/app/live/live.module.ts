@@ -6,6 +6,7 @@ import {LiveComponent} from './live.component';
 import {HttpClientModule} from '@angular/common/http';
 import {CommentModule} from '../core/component/comment/comment.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FooterModule } from '../core/component/footer/footer.module';
 
 @NgModule({
   declarations: [LiveComponent],
@@ -14,7 +15,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LiveRoutingModule,
     HttpClientModule,
     CommentModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FooterModule,
   ]
 })
 export class LiveModule {

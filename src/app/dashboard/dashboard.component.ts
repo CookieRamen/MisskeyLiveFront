@@ -9,6 +9,5 @@ export class DashboardComponent implements OnInit {
   isMenuCollapsed = true;
 
   ngOnInit() {
-
   }
 }

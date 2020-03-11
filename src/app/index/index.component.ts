@@ -49,7 +49,7 @@ export class IndexComponent implements OnInit {
 
     this.ogpService.setMetaTag({
       title: 'MisskeyLive',
-      desc: '分散マイクロブログSNS Misskey.io の生放送サービス！ 無料で高画質な配信ができる!',
+      desc: '分散マイクロブログSNS Misskey.io の生放送サービス',
       type: 'website',
       img: 'https://s3.arkjp.net/live/ogp-default.png'
     });
