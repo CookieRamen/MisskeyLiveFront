@@ -36,8 +36,8 @@ export class CommentComponent implements OnInit {
   faVolumeUp = faVolumeUp;
   faVolumeMute = faVolumeMute;
 
-  @ViewChild('comments', { static: false }) comments: ElementRef;
-  @ViewChild('input', {static: false}) input: ElementRef;
+  @ViewChild('comments') comments: ElementRef;
+  @ViewChild('input') input: ElementRef;
   @Input() userId: string;
   staticSessionService = SessionService;
   ws: WebSocket;
