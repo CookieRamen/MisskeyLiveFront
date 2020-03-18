@@ -21,7 +21,7 @@ interface Archives {
   styleUrls: ['./archives.component.scss']
 })
 export class ArchivesComponent implements OnInit {
-  @ViewChild('LockError', {static: false}) lockError: SwalComponent;
+  @ViewChild('LockError') lockError: SwalComponent;
 
   archives: Archives[] = [];
   faUnlock = faUnlock;

@@ -22,9 +22,9 @@ interface UserData {
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit, OnDestroy {
-  @ViewChild('title', {static: false}) title: ElementRef;
-  @ViewChild('desc', {static: false}) desc: ElementRef;
-  @ViewChild('updated', {static: false}) updated: SwalComponent;
+  @ViewChild('title') title: ElementRef;
+  @ViewChild('desc') desc: ElementRef;
+  @ViewChild('updated') updated: SwalComponent;
 
   video: SafeResourceUrl;
   userName: string;
