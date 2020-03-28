@@ -151,6 +151,8 @@ export class CommentComponent implements OnInit {
     const text = note.text
       .replace(`#ML${this.userId}`, '')
       .replace('#MisskeyLive', '')
+      .replace(`https://live.misskey.io/${this.userId}`, '')
+      .replace(`https://live.misskey.io/@${this.userId}`, '')
       .replace(`<https://live.misskey.io/${this.userId}>`, '')
       .replace(`<https://live.misskey.io/@${this.userId}>`, '');
     const userName = note.user.name === null ? note.user.username : note.user.name;
