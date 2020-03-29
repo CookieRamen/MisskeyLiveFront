@@ -152,7 +152,8 @@ export class CommentComponent implements OnInit {
       .replace(`#ML${this.userId}`, '')
       .replace('#MisskeyLive', '')
       .replace(`https://live.misskey.io/${this.userId}`, '')
-      .replace(`https://live.misskey.io/@${this.userId}`, '');
+      .replace(`https://live.misskey.io/@${this.userId}`, '')
+      .replace('<>', '');
     const userName = note.user.name === null ? note.user.username : note.user.name;
     const userNameView = note.user.host === null ? userName : `${userName}@${note.user.host}`;
     this.writeComment(note.user.avatarUrl, userNameView, text, note.emojis, bouyomi);
