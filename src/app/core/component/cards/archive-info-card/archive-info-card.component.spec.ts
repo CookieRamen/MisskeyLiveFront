@@ -12,9 +12,9 @@ describe('ArchiveInfoCardComponent', () => {
       imports: [
         RouterTestingModule
       ],
-      declarations: [ ArchiveInfoCardComponent ]
+      declarations: [ArchiveInfoCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

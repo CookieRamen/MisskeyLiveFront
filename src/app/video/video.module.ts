@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { VideoRoutingModule } from './video-routing.module';
 import { VideoComponent } from './video.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FooterModule } from '../core/component/footer/footer.module';
+import { ArchiveInfoCardModule } from '../core/component/cards/archive-info-card/archive-info-card.module';
 
 @NgModule({
   declarations: [VideoComponent],
@@ -13,6 +14,8 @@ import { FooterModule } from '../core/component/footer/footer.module';
     VideoRoutingModule,
     HttpClientModule,
     FooterModule,
+    ArchiveInfoCardModule
   ]
 })
-export class VideoModule { }
+export class VideoModule {
+}

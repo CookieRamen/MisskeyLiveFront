@@ -36,7 +36,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   constructor(
     private httpClient: HttpClient,
-    private sanitizer: DomSanitizer,
+    private sanitizer: DomSanitizer
   ) {
   }
 
@@ -59,7 +59,7 @@ export class IndexComponent implements OnInit, OnDestroy {
       title: this.title.nativeElement.value,
       description: this.desc.nativeElement.value,
       auto_post: this.userData.auto_post,
-      post_text: this.userData.post_text,
+      post_text: this.userData.post_text
     };
 
     this.httpClient.post(`${environment.api}/api/user/edit`, data)
@@ -69,7 +69,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   liveCheck() {
-    this.httpClient.get(`https://hls-${this.userData.server}.arkjp.net/${this.userName}/index.m3u8`, {responseType: 'text'})
+    this.httpClient.get(`https://hls-${this.userData.server}.arkjp.net/${this.userName}/index.m3u8`, { responseType: 'text' })
       .subscribe(() => {
         if (this.fail === false) {
           this.online = true;

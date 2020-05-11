@@ -1,9 +1,9 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {IndexComponent} from './index.component';
-import {RouterTestingModule} from '@angular/router/testing';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {LiveInfoCardComponent} from '../core/component/cards/live-info-card/live-info-card.component';
+import { IndexComponent } from './index.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { LiveInfoCardComponent } from '../core/component/cards/live-info-card/live-info-card.component';
 import { ArchiveInfoCardComponent } from '../core/component/cards/archive-info-card/archive-info-card.component';
 import { FooterModule } from '../core/component/footer/footer.module';
 
@@ -16,7 +16,7 @@ describe('IndexComponent', () => {
       imports: [
         RouterTestingModule,
         HttpClientTestingModule,
-        FooterModule,
+        FooterModule
       ],
       declarations: [IndexComponent, LiveInfoCardComponent, ArchiveInfoCardComponent]
     }).compileComponents();

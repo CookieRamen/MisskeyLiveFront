@@ -1,10 +1,10 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {LiveComponent} from './live.component';
-import {RouterTestingModule} from '@angular/router/testing';
-import {HttpClientModule} from '@angular/common/http';
-import {CookieService} from 'ngx-cookie-service';
-import {CommentModule} from '../core/component/comment/comment.module';
+import { LiveComponent } from './live.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import { CommentModule } from '../core/component/comment/comment.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterModule } from '../core/component/footer/footer.module';
 
@@ -20,7 +20,7 @@ describe('LiveComponent', () => {
         HttpClientModule,
         CommentModule,
         FontAwesomeModule,
-        FooterModule,
+        FooterModule
       ],
       providers: [CookieService]
     }).compileComponents();

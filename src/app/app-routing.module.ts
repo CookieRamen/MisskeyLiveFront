@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes, UrlSegment} from '@angular/router';
-import {AuthGuard} from './core/guard/auth.guard';
-import {UserRedirectGuard} from './core/guard/user-redirect.guard';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes, UrlSegment } from '@angular/router';
+import { AuthGuard } from './core/guard/auth.guard';
+import { UserRedirectGuard } from './core/guard/user-redirect.guard';
 
 export function userMatcher(url) {
   if (url.length !== 1 || !url[0].path.startsWith('@')) {

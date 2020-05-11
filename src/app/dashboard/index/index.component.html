@@ -1,9 +1,9 @@
 <swal
   #updated
-  title="情報を更新しました"
-  type="success"
   [showConfirmButton]="false"
-  timer="1000">
+  timer="1000"
+  title="情報を更新しました"
+  type="success">
 </swal>
 
 <div class="container-fluid py-3">
@@ -17,7 +17,8 @@
               <iframe [src]="video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </ng-template>
             <ng-template [ngIf]="!online">
-              <img class="embed-responsive-item" src="https://s3.arkjp.net/live/offline.jpg" draggable="false" alt="Offline">
+              <img alt="Offline" class="embed-responsive-item" draggable="false"
+                   src="https://s3.arkjp.net/live/offline.jpg">
             </ng-template>
           </div>
         </div>
@@ -30,15 +31,15 @@
         <div class="card-body">
           <div class="form-group">
             <label for="title">配信タイトル (最大30文字)</label>
-            <input #title type="text" class="form-control" id="title" maxlength="30" [value]="userData?.title"
-                   placeholder="例）初配信 コイン積みします">
+            <input #title [value]="userData?.title" class="form-control" id="title" maxlength="30" placeholder="例）初配信 コイン積みします"
+                   type="text">
           </div>
           <div class="form-group">
             <label for="desc">配信説明 (最大300文字)</label>
-            <textarea #desc id="desc" class="form-control" [value]="userData?.description"
-                      placeholder="例）暇なのでコイン積む配信します。" rows="5" maxlength="300"></textarea>
+            <textarea #desc [value]="userData?.description" class="form-control" id="desc"
+                      maxlength="300" placeholder="例）暇なのでコイン積む配信します。" rows="5"></textarea>
           </div>
-          <button class="btn btn-primary" (click)="updateData()">更新</button>
+          <button (click)="updateData()" class="btn btn-primary">更新</button>
         </div>
       </div>
     </div>
@@ -50,11 +51,11 @@
           <div class="form-group">
             <label for="rtmp">RTMP URL</label>
             <div class="input-group mb-3">
-              <input id="rtmp" class="form-control" type="text"
-                     [value]="'rtmp://rtmp-'+ userData?.server + '.arkjp.net/live'" readonly>
+              <input [value]="'rtmp://rtmp-'+ userData?.server + '.arkjp.net/live'" class="form-control" id="rtmp"
+                     readonly type="text">
               <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" ngxClipboard
-                        [cbContent]="'rtmp://rtmp-'+ userData?.server + '.arkjp.net/live'">コピー
+                <button [cbContent]="'rtmp://rtmp-'+ userData?.server + '.arkjp.net/live'" class="btn btn-outline-secondary" ngxClipboard
+                        type="button">コピー
                 </button>
               </div>
             </div>
@@ -63,10 +64,10 @@
           <div class="form-group">
             <label for="streamkey">ストリームキー</label>
             <div class="input-group mb-3">
-              <input id="streamkey" class="form-control" type="password" value="みたな？ここにはストリームキーなんて書いてないのだよ" readonly>
+              <input class="form-control" id="streamkey" readonly type="password" value="みたな？ここにはストリームキーなんて書いてないのだよ">
               <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" ngxClipboard
-                        [cbContent]="userName + '?token=' + userData?.live_token">コピー
+                <button [cbContent]="userName + '?token=' + userData?.live_token" class="btn btn-outline-secondary" ngxClipboard
+                        type="button">コピー
                 </button>
               </div>
             </div>
@@ -76,11 +77,11 @@
           <div class="form-group">
             <label for="view">視聴用URL</label>
             <div class="input-group mb-3">
-              <input id="view" class="form-control" type="text"
-                     [value]="'https://live.misskey.io/@'+ userName" readonly>
+              <input [value]="'https://live.misskey.io/@'+ userName" class="form-control" id="view"
+                     readonly type="text">
               <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" ngxClipboard
-                        [cbContent]="'https://live.misskey.io/@'+ userName">コピー
+                <button [cbContent]="'https://live.misskey.io/@'+ userName" class="btn btn-outline-secondary" ngxClipboard
+                        type="button">コピー
                 </button>
               </div>
             </div>

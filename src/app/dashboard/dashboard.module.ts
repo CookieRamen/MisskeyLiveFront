@@ -35,7 +35,7 @@ import { FooterModule } from '../core/component/footer/footer.module';
     OrderModule,
     FontAwesomeModule,
     NgbTooltipModule,
-    FooterModule,
+    FooterModule
   ]
 })
 export class DashboardModule {

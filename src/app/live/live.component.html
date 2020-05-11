@@ -6,8 +6,8 @@
           <iframe [src]="video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </ng-template>
         <ng-template [ngIf]="!online">
-          <img class="embed-responsive-item" src="https://s3.arkjp.net/live/offline.jpg" draggable="false"
-               alt="Offline">
+          <img alt="Offline" class="embed-responsive-item" draggable="false"
+               src="https://s3.arkjp.net/live/offline.jpg">
         </ng-template>
       </div>
       <div class="container-fluid mt-1">
@@ -17,23 +17,25 @@
             <p class="m-0"><a [href]="'https://misskey.io/@' + userId" target="_blank">{{userId}}</a></p>
           </div>
           <div class="col-md-2 text-right">
-            <h5><fa-icon [icon]="faEye"></fa-icon> {{count}}</h5>
+            <h5>
+              <fa-icon [icon]="faEye"></fa-icon>
+              {{count}}</h5>
           </div>
         </div>
         <p class="description">{{ userData?.description }}</p>
       </div>
-      <div class="container-fluid my-3" *ngIf="archiveData.length != 0">
+      <div *ngIf="archiveData.length != 0" class="container-fluid my-3">
         <h4>{{userId}} の過去の配信</h4>
         <div class="card-columns">
-          <ng-template ngFor let-data [ngForOf]="archiveData">
+          <ng-template [ngForOf]="archiveData" let-data ngFor>
             <a [routerLink]="'/v/' + data.id">
               <div class="card">
                 <div class="embed-responsive embed-responsive-16by9">
                   <img [src]="data.thumbnail"
                        alt="image"
                        class="card-img-top embed-responsive-item"
-                       onerror="this.src = 'https://s3.arkjp.net/live/thumb-404.jpg'"
                        draggable="false"
+                       onerror="this.src = 'https://s3.arkjp.net/live/thumb-404.jpg'"
                   />
                 </div>
                 <div class="card-body">
@@ -49,8 +51,8 @@
       <app-footer></app-footer>
     </div>
     <div class="col-sm-12 col-xl-3 col-lg-4 h-100 comments">
-      <div class="btn btn-secondary popup-button" (click)="popupChat()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <div (click)="popupChat()" class="btn btn-secondary popup-button">
+        <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 0h24v24H0z" fill="none"/>
           <path
             d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"

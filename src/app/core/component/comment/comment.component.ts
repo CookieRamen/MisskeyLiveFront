@@ -1,10 +1,10 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {SessionService} from '../../service/session.service';
-import {default as twemoji} from 'twemoji';
-import {ActivatedRoute} from '@angular/router';
-import {faVolumeMute, faVolumeUp} from '@fortawesome/free-solid-svg-icons';
-import {environment} from '../../../../environments/environment';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { SessionService } from '../../service/session.service';
+import { default as twemoji } from 'twemoji';
+import { ActivatedRoute } from '@angular/router';
+import { faVolumeMute, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import { environment } from '../../../../environments/environment';
 
 interface MisskeyEmoji {
   name: string;
@@ -49,7 +49,8 @@ export class CommentComponent implements OnInit {
   ngReplace: string;
   ngList: string[] = [];
 
-  constructor(private httpClient: HttpClient, private route: ActivatedRoute) { }
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     twemoji.size = 'svg';
@@ -78,7 +79,7 @@ export class CommentComponent implements OnInit {
     this.httpClient.post<MisskeyMeta>('https://misskey.io/api/meta', {}).subscribe(data => {
       data.emojis.forEach(emoji => {
         this.emojis.set(`:${emoji.name}:`, this.convertEmojiToHtml(emoji));
-      })
+      });
     });
   }
 
@@ -91,7 +92,7 @@ export class CommentComponent implements OnInit {
       this.ngMode = data.ng_mode;
       this.ngReplace = data.ng_replace;
       this.ngList.push(...data.ng_list);
-    })
+    });
   }
 
   wsInit() {
@@ -230,7 +231,7 @@ export class CommentComponent implements OnInit {
       this.isCommentWait = false;
       setTimeout(() => {
         this.input.nativeElement.focus();
-      }, 300)
+      }, 300);
     }, 3000);
     const data = {
       i: SessionService.token,

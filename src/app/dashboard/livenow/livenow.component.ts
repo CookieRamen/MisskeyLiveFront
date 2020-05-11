@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as io from 'socket.io-client';
-import {environment} from '../../../environments/environment';
-import {SessionService} from '../../core/service/session.service';
-import {HttpClient} from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { SessionService } from '../../core/service/session.service';
+import { HttpClient } from '@angular/common/http';
 import { faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons/faMicrophoneSlash';
 import { faMicrophone } from '@fortawesome/free-solid-svg-icons/faMicrophone';
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons/faVolumeUp';
@@ -35,7 +35,8 @@ export class LivenowComponent implements OnInit, OnDestroy {
   faEye = faEye;
   faEyeSlash = faEyeSlash;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   ngOnInit() {
     if (!('getUserMedia' in navigator.mediaDevices) || !('MediaRecorder' in window)) {
@@ -60,13 +61,13 @@ export class LivenowComponent implements OnInit, OnDestroy {
 
   async setupDesktop() {
     // @ts-ignore
-    this.stream = await navigator.mediaDevices.getDisplayMedia({video: true, audio: true});
+    this.stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
     this.isDesktop = true;
     await this.setupMic();
   }
 
   async setupCamera() {
-    this.stream = await navigator.mediaDevices.getUserMedia({video: true});
+    this.stream = await navigator.mediaDevices.getUserMedia({ video: true });
     this.isDesktop = false;
     await this.setupMic();
   }
@@ -74,13 +75,14 @@ export class LivenowComponent implements OnInit, OnDestroy {
   async setupMic() {
     this.isDesktopMute = false;
     try {
-      this.mics = (await navigator.mediaDevices.getUserMedia({audio: true})).getAudioTracks();
+      this.mics = (await navigator.mediaDevices.getUserMedia({ audio: true })).getAudioTracks();
       this.mics.forEach(mic => {
         mic.enabled = true;
         this.stream.addTrack(mic);
       });
       this.isMicMute = false;
-    } catch (e) {}
+    } catch (e) {
+    }
   }
 
   toggleMicMute() {
@@ -111,7 +113,7 @@ export class LivenowComponent implements OnInit, OnDestroy {
 
   start() {
     const socket = io(`wss://livenow-${this.server}.arkjp.net`);
-    socket.emit('start', {stream_key: `${SessionService.user.username}?token=${this.streamKey}`});
+    socket.emit('start', { stream_key: `${SessionService.user.username}?token=${this.streamKey}` });
     // @ts-ignore
     this.recorder = new MediaRecorder(this.stream);
     this.recorder.ondataavailable = e => socket.emit('video', e.data);

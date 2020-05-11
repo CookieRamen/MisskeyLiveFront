@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {SessionService} from './core/service/session.service';
-import {environment} from '../environments/environment';
-import {CookieService} from 'ngx-cookie-service';
-import {NavigationStart, Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { SessionService } from './core/service/session.service';
+import { environment } from '../environments/environment';
+import { CookieService } from 'ngx-cookie-service';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',

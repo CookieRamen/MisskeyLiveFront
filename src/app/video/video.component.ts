@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {environment} from '../../environments/environment';
-import {ActivatedRoute} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {SessionService} from '../core/service/session.service';
+import { Component, OnInit } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { SessionService } from '../core/service/session.service';
 
 export interface VideoData {
   user: string;

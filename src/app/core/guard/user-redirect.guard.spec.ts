@@ -1,7 +1,7 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 
 import { UserRedirectGuard } from './user-redirect.guard';
-import {RouterTestingModule} from '@angular/router/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('UserRedirectGuard', () => {
   beforeEach(() => {

@@ -28,8 +28,9 @@ export class ArchivesComponent implements OnInit {
   faLock = faLock;
 
   constructor(
-    private httpClient: HttpClient,
-  ) { }
+    private httpClient: HttpClient
+  ) {
+  }
 
   ngOnInit() {
     this.httpClient.get<Archives[]>(`${environment.api}/api/archives/list/${SessionService.user.username}?i=${SessionService.token}`)
