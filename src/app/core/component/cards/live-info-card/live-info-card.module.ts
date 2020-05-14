@@ -6,6 +6,9 @@ import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [LiveInfoCardComponent],
+  exports: [
+    LiveInfoCardComponent
+  ],
   imports: [
     CommonModule,
     TimeagoModule.forRoot()

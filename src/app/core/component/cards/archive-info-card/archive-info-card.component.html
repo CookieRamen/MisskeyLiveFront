@@ -1,5 +1,5 @@
 <a [routerLink]="'/v/' + id">
-  <div class="card">
+  <div class="card h-100">
     <div class="embed-responsive embed-responsive-16by9">
       <img [src]="thumbnail"
            alt="image"
@@ -10,6 +10,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ title }}</h5>
       <p class="text-white m-0">@{{username}}</p>
+      <p class="text-white m-0">{{getUnixTime(timestamp) | timeago}}</p>
     </div>
   </div>
 </a>
