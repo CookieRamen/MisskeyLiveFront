@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {CookieService} from 'ngx-cookie-service';
-import {HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpClient } from '@angular/common/http';
 
 interface MisskeyUser {
   username: string;
@@ -30,7 +30,7 @@ export class SessionService {
     if (SessionService.user !== null) {
       return;
     }
-    const req = this.httpClient.post<MisskeyUser>('https://misskey.io/api/i', {i: SessionService.token});
+    const req = this.httpClient.post<MisskeyUser>('https://misskey.io/api/i', { i: SessionService.token });
     req.subscribe(
       user => SessionService.user = user,
       () => this.logout());

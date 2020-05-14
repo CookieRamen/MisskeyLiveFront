@@ -1,9 +1,9 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {AuthComponent} from './auth.component';
-import {CookieService} from 'ngx-cookie-service';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {RouterTestingModule} from '@angular/router/testing';
+import { AuthComponent } from './auth.component';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AuthComponent', () => {
   let component: AuthComponent;
@@ -13,7 +13,7 @@ describe('AuthComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpClientTestingModule,
+        HttpClientTestingModule
       ],
       providers: [CookieService],
       declarations: [AuthComponent]

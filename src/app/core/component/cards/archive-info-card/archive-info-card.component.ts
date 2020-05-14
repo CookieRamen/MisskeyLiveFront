@@ -12,10 +12,16 @@ export class ArchiveInfoCardComponent implements OnInit {
   @Input() duration: string;
   @Input() username: string;
   @Input() thumbnail: string;
+  @Input() timestamp: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+  getUnixTime(timestamp: string) {
+    return new Date(timestamp).getTime();
   }
 
 }

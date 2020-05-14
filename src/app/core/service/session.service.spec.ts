@@ -1,8 +1,8 @@
-import {async, TestBed} from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 
-import {SessionService} from './session.service';
-import {CookieService} from 'ngx-cookie-service';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { SessionService } from './session.service';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('SessionService', () => {
   beforeEach(async(() => {

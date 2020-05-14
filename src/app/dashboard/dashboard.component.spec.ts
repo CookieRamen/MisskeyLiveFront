@@ -27,7 +27,7 @@ describe('DashboardComponent', () => {
         OrderModule,
         FontAwesomeModule,
         NgbTooltipModule,
-        FooterModule,
+        FooterModule
       ],
       declarations: [DashboardComponent]
     }).compileComponents();

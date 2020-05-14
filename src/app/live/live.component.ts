@@ -1,8 +1,8 @@
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {ActivatedRoute} from '@angular/router';
-import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { OgpService } from '../services/ogp.service';
 import { isPlatformBrowser } from '@angular/common';
 import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
@@ -80,7 +80,8 @@ export class LiveComponent implements OnInit, OnDestroy {
     this.video = this.sanitizer.bypassSecurityTrustResourceUrl(`${environment.api}/embed/${this.userId}`);
 
     // load user data
-    const intervalId = setInterval(() => {}, 100);
+    const intervalId = setInterval(() => {
+    }, 100);
     this.httpClient.get<Data>(`${environment.api}/api/data/${this.userId}`).subscribe(data => {
       if (data.status === 'OK') {
         this.userData = data;
@@ -109,7 +110,7 @@ export class LiveComponent implements OnInit, OnDestroy {
   }
 
   liveCheck() {
-    this.httpClient.get(`https://hls-${this.userData.server}.arkjp.net/${this.userId}/index.m3u8`, {responseType: 'text'})
+    this.httpClient.get(`https://hls-${this.userData.server}.arkjp.net/${this.userId}/index.m3u8`, { responseType: 'text' })
       .subscribe(() => {
         if (this.fail === false) {
           this.online = true;

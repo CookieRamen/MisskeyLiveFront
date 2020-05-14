@@ -6,30 +6,21 @@
     <h4>{{ videoData?.title }}</h4>
     <ng-template [ngIf]="videoData?.user">
       <p class="m-0">{{videoData?.timestamp | date: 'yyyy年MM月dd日 HH:mm' : '+1800'}} にライブ配信</p>
-      <h5><a href="https://misskey.io/@{{ videoData?.user }}" target="_blank" rel="noopener">@{{ videoData?.user }}</a></h5>
+      <h5><a href="https://misskey.io/@{{ videoData?.user }}" rel="noopener" target="_blank">@{{ videoData?.user }}</a>
+      </h5>
     </ng-template>
     <p class="description">{{ videoData?.description }}</p>
-    <div class="container-fluid my-3" *ngIf="archiveData.length != 0">
+    <div *ngIf="archiveData.length != 0" class="container-fluid my-3">
       <h4>{{videoData?.user}} の過去の配信</h4>
       <div class="card-columns">
-        <ng-template ngFor let-data [ngForOf]="archiveData">
-          <a [routerLink]="'/v/' + data.id">
-            <div class="card">
-              <div class="embed-responsive embed-responsive-16by9">
-                <img [src]="data.thumbnail"
-                     alt="image"
-                     class="card-img-top embed-responsive-item"
-                     onerror="this.src = 'https://s3.arkjp.net/live/thumb-404.jpg'"
-                     draggable="false"
-                />
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">{{ data.title }}</h5>
-                <p class="text-white m-0">{{data.duration * 1000 | date: 'HH:mm:ss' : 'UTC'}}</p>
-                <p class="text-white m-0">{{data.timestamp | date: 'yyyy年MM月dd日 HH:mm' : '+1800'}}</p>
-              </div>
-            </div>
-          </a>
+        <ng-template [ngForOf]="archiveData" let-data ngFor>
+          <app-archive-info-card
+            [duration]="data.duration"
+            [id]="data.id"
+            [thumbnail]="data.thumbnail"
+            [timestamp]="data.timestamp"
+            [title]="data.title"
+            [username]="videoData?.user"></app-archive-info-card>
         </ng-template>
       </div>
     </div>
