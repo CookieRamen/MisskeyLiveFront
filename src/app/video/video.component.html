@@ -12,15 +12,17 @@
     <p class="description">{{ videoData?.description }}</p>
     <div *ngIf="archiveData.length != 0" class="container-fluid my-3">
       <h4>{{videoData?.user}} の過去の配信</h4>
-      <div class="card-columns">
+      <div class="row">
         <ng-template [ngForOf]="archiveData" let-data ngFor>
-          <app-archive-info-card
-            [duration]="data.duration"
-            [id]="data.id"
-            [thumbnail]="data.thumbnail"
-            [timestamp]="data.timestamp"
-            [title]="data.title"
-            [username]="videoData?.user"></app-archive-info-card>
+          <div class="col-md-6 col-lg-3 mb-4">
+            <app-archive-info-card
+              [duration]="data.duration"
+              [id]="data.id"
+              [thumbnail]="data.thumbnail"
+              [timestamp]="data.timestamp"
+              [title]="data.title"
+              [username]="videoData?.user"></app-archive-info-card>
+          </div>
         </ng-template>
       </div>
     </div>
