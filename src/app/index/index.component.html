@@ -1,14 +1,16 @@
 <div *ngIf="liveInfo.length > 0" class="container-fluid">
   <h1 class="col-12">現在配信中</h1>
-  <ng-template [ngForOf]="liveInfo" let-data ngFor>
-    <div class="col-lg-3">
-      <app-live-info-card
-        [thumbnail]="apiUrl + '/public/thumbnails/' + data.username + '.jpg?v=' + cacheVersion"
-        [title]="data.title"
-        [url]="'/@' + data.username"
-        [username]="data.username"></app-live-info-card>
-    </div>
-  </ng-template>
+  <div class="row">
+    <ng-template [ngForOf]="liveInfo" let-data ngFor>
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+        <app-live-info-card
+          [thumbnail]="apiUrl + '/public/thumbnails/' + data.username + '.jpg?v=' + cacheVersion"
+          [title]="data.title"
+          [url]="'/@' + data.username"
+          [username]="data.username"></app-live-info-card>
+      </div>
+    </ng-template>
+  </div>
 </div>
 
 <div *ngIf="archiveInfo.length > 0" class="container-fluid">

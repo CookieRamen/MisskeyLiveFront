@@ -26,25 +26,27 @@
       </div>
       <div *ngIf="archiveData.length != 0" class="container-fluid my-3">
         <h4>{{userId}} の過去の配信</h4>
-        <div class="card-columns">
+        <div class="row">
           <ng-template [ngForOf]="archiveData" let-data ngFor>
-            <a [routerLink]="'/v/' + data.id">
-              <div class="card">
-                <div class="embed-responsive embed-responsive-16by9">
-                  <img [src]="data.thumbnail"
-                       alt="image"
-                       class="card-img-top embed-responsive-item"
-                       draggable="false"
-                       onerror="this.src = 'https://s3.arkjp.net/live/thumb-404.jpg'"
-                  />
+            <div class="col-md-6 col-lg-3 mb-4">
+              <a [routerLink]="'/v/' + data.id">
+                <div class="card">
+                  <div class="embed-responsive embed-responsive-16by9">
+                    <img [src]="data.thumbnail"
+                         alt="image"
+                         class="card-img-top embed-responsive-item"
+                         draggable="false"
+                         onerror="this.src = 'https://s3.arkjp.net/live/thumb-404.jpg'"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ data.title }}</h5>
+                    <p class="text-white m-0">{{data.duration * 1000 | date: 'HH:mm:ss' : 'UTC'}}</p>
+                    <p class="text-white m-0">{{data.timestamp | date: 'yyyy年MM月dd日 HH:mm' : '+1800'}}</p>
+                  </div>
                 </div>
-                <div class="card-body">
-                  <h5 class="card-title">{{ data.title }}</h5>
-                  <p class="text-white m-0">{{data.duration * 1000 | date: 'HH:mm:ss' : 'UTC'}}</p>
-                  <p class="text-white m-0">{{data.timestamp | date: 'yyyy年MM月dd日 HH:mm' : '+1800'}}</p>
-                </div>
-              </div>
-            </a>
+              </a>
+            </div>
           </ng-template>
         </div>
       </div>
