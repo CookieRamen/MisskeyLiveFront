@@ -184,7 +184,7 @@ export class CommentComponent implements OnInit {
     if (!this.bouyomi || !bouyomi) {
       return;
     }
-    this.bouyomiSpeech(comment + ' ' + name);
+    this.bouyomiSpeech(comment);
   }
 
   replaceEmoji(text: string, emojis: MisskeyEmoji[]) {
