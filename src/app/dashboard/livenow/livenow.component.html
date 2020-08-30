@@ -27,7 +27,8 @@
                       class="btn btn-mute" ngbTooltip="デスクトップ音声ミュート">
                 <fa-icon [icon]="isDesktopMute ? faVolumeMute : faVolumeUp"></fa-icon>
               </button>
-              <button (click)="isPreviewMute = !isPreviewMute" [class.btn-danger]="isPreviewMute" [class.btn-light]="!isPreviewMute"
+              <button (click)="isPreviewMute = !isPreviewMute" [class.btn-danger]="isPreviewMute"
+                      [class.btn-light]="!isPreviewMute"
                       class="btn btn-mute" ngbTooltip="プレビュー音声ミュート">
                 <fa-icon [icon]="isPreviewMute ? faEyeSlash : faEye"></fa-icon>
               </button>
