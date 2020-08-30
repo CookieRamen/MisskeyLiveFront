@@ -10,7 +10,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ title }}</h5>
       <p class="text-white m-0">@{{username}}</p>
-      <p class="text-white m-0">{{getUnixTime(timestamp) | timeago}}</p>
+      <p class="text-white m-0">{{getUnixTime(timestamp + '') | timeago}}</p>
     </div>
   </div>
 </a>

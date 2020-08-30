@@ -6,10 +6,14 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SessionService } from '../core/service/session.service';
 
 export interface VideoData {
-  user: string;
-  title: string;
   description: string;
+  isOwner: boolean;
+  lock: number;
+  public: number;
+  stream: string;
   timestamp: string;
+  title: string;
+  user: string;
 }
 
 interface ArchiveList {
@@ -69,7 +73,11 @@ export class VideoComponent implements OnInit {
             user: null,
             description: '',
             title: '',
-            timestamp: ''
+            timestamp: '',
+            isOwner: false,
+            stream: '',
+            lock: 0,
+            public: 0
           };
         });
   }

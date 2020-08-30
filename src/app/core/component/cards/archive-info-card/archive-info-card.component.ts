@@ -9,7 +9,7 @@ export class ArchiveInfoCardComponent implements OnInit {
   @Input() user: string;
   @Input() id: string;
   @Input() title: string;
-  @Input() duration: string;
+  @Input() duration: number;
   @Input() username: string;
   @Input() thumbnail: string;
   @Input() timestamp: string;

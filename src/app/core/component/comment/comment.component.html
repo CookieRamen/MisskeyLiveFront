@@ -7,7 +7,8 @@
   </div>
   <ul #comments class="list-unstyled m-0 px-3"></ul>
   <form (ngSubmit)="sendComment()" *ngIf="staticSessionService.login && !isCommentWait" class="mr-0 mr-md-auto">
-    <input #input [(ngModel)]="comment" autocomplete="off" autofocus class="send" name="comment" placeholder="Enterキーでコメントを送信"
+    <input #input [(ngModel)]="comment" autocomplete="off" autofocus class="send" name="comment"
+           placeholder="Enterキーでコメントを送信"
            type="text">
   </form>
   <input *ngIf="!staticSessionService.login" class="send" disabled placeholder="ログインしていないためコメントできません" type="text">

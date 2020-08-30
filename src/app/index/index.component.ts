@@ -15,6 +15,7 @@ interface ArchiveInfo {
   timestamp: string;
   thumbnail: string;
   duration: number;
+  user: string;
 }
 
 
