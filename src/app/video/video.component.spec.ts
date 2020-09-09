@@ -4,6 +4,7 @@ import { VideoComponent } from './video.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterModule } from '../core/component/footer/footer.module';
+import { MarkdownModule } from 'ngx-markdown';
 
 describe('VideoComponent', () => {
   let component: VideoComponent;
@@ -14,7 +15,8 @@ describe('VideoComponent', () => {
       imports: [
         RouterTestingModule,
         HttpClientModule,
-        FooterModule
+        FooterModule,
+        MarkdownModule.forRoot(),
       ],
       declarations: [VideoComponent]
     })

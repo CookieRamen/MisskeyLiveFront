@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommentModule } from '../core/component/comment/comment.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterModule } from '../core/component/footer/footer.module';
+import { ArchiveInfoCardModule } from '../core/component/cards/archive-info-card/archive-info-card.module';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [LiveComponent],
@@ -16,7 +18,8 @@ import { FooterModule } from '../core/component/footer/footer.module';
     HttpClientModule,
     CommentModule,
     FontAwesomeModule,
-    FooterModule
+    FooterModule,
+    MarkdownModule.forRoot(),
   ]
 })
 export class LiveModule {

@@ -6,6 +6,7 @@ import { VideoComponent } from './video.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterModule } from '../core/component/footer/footer.module';
 import { ArchiveInfoCardModule } from '../core/component/cards/archive-info-card/archive-info-card.module';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [VideoComponent],
@@ -14,7 +15,8 @@ import { ArchiveInfoCardModule } from '../core/component/cards/archive-info-card
     VideoRoutingModule,
     HttpClientModule,
     FooterModule,
-    ArchiveInfoCardModule
+    ArchiveInfoCardModule,
+    MarkdownModule.forRoot(),
   ]
 })
 export class VideoModule {

@@ -10,7 +10,7 @@
       <h5><a href="https://misskey.io/@{{ videoData?.user }}" rel="noopener" target="_blank">@{{ videoData?.user }}</a>
       </h5>
     </ng-template>
-    <p class="description">{{ videoData?.description }}</p>
+    <markdown ngPreserveWhitespaces class="description">{{ videoData?.description }}</markdown>
     <div *ngIf="archiveData.length != 0" class="container-fluid my-3">
       <h4>{{videoData?.user}} の過去の配信</h4>
       <div class="row">
