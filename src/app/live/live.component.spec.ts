@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { CommentModule } from '../core/component/comment/comment.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterModule } from '../core/component/footer/footer.module';
+import { MarkdownModule } from 'ngx-markdown';
 
 describe('LiveComponent', () => {
   let component: LiveComponent;
@@ -20,7 +21,8 @@ describe('LiveComponent', () => {
         HttpClientModule,
         CommentModule,
         FontAwesomeModule,
-        FooterModule
+        FooterModule,
+        MarkdownModule.forRoot(),
       ],
       providers: [CookieService]
     }).compileComponents();
