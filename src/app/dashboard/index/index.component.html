@@ -38,7 +38,7 @@
           <div class="form-group">
             <label for="desc">配信説明 (最大300文字)</label>
             <textarea #desc [value]="userData?.description" class="form-control" id="desc"
-                      maxlength="300" placeholder="例）暇なのでコイン積む配信します。" rows="5"></textarea>
+                      maxlength="300" placeholder="Markdown support" rows="5"></textarea>
           </div>
           <button (click)="updateData()" class="btn btn-primary">更新</button>
         </div>
