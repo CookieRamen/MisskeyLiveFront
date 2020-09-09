@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SessionService } from '../core/service/session.service';
+import { OgpService } from '../services/ogp.service';
 
 export interface VideoData {
   description: string;
@@ -14,6 +15,7 @@ export interface VideoData {
   timestamp: string;
   title: string;
   user: string;
+  thumbnail: string;
 }
 
 interface ArchiveList {
@@ -38,7 +40,8 @@ export class VideoComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private ogpService: OgpService,
   ) {
   }
 
@@ -63,6 +66,12 @@ export class VideoComponent implements OnInit {
       .subscribe(
         data => {
           this.videoData = data;
+          this.ogpService.setMetaTag({
+            title: this.videoData.title + ' - MisskeyLive',
+            desc: this.videoData.description,
+            img: this.videoData.thumbnail,
+            type: 'article'
+          });
           this.httpClient.get<ArchiveList[]>(`${environment.api}/api/archives/list/${data.user}`)
             .subscribe(list => {
               this.archiveData = list;
@@ -77,7 +86,8 @@ export class VideoComponent implements OnInit {
             isOwner: false,
             stream: '',
             lock: 0,
-            public: 0
+            public: 0,
+            thumbnail: ''
           };
         });
   }
