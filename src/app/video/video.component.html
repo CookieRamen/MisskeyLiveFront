@@ -3,7 +3,7 @@
     <iframe [src]="video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
   <div class="mt-1">
-    <h4>{{ videoData?.title }}  <a *ngIf="videoData.isOwner" [href]="videoData.stream" class="btn btn-primary ml-4">ダウンロード</a>
+    <h4>{{ videoData?.title }}  <a *ngIf="videoData?.isOwner" [href]="videoData.stream" class="btn btn-primary ml-4">ダウンロード</a>
     </h4>
     <ng-template [ngIf]="videoData?.user">
       <p class="m-0">{{videoData?.timestamp | date: 'yyyy年MM月dd日 HH:mm' : '+1800'}} にライブ配信</p>
