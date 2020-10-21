@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 
 interface MisskeyUser {
@@ -15,14 +14,13 @@ export class SessionService {
   static token: string = null;
   static user: MisskeyUser = null;
 
-  constructor(private cookieService: CookieService, private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) {
     this.refresh();
   }
 
   refresh() {
-    this.cookieService.delete('live-token');
-    SessionService.login = this.cookieService.check('live_token');
-    SessionService.token = SessionService.login ? this.cookieService.get('live_token') : null;
+    SessionService.login = !!localStorage.getItem('token');
+    SessionService.token = SessionService.login ? localStorage.getItem('token') : null;
     if (!SessionService.login) {
       SessionService.user = null;
       return;
@@ -38,7 +36,7 @@ export class SessionService {
   }
 
   logout() {
-    this.cookieService.delete('live_token');
+    localStorage.removeItem('token');
     this.refresh();
   }
 }

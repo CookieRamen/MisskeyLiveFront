@@ -33,8 +33,7 @@
             ],
             "scripts": [
               "node_modules/marked/lib/marked.js"
-            ],
-            "es5BrowserSupport": true
+            ]
           },
           "configurations": {
             "production": {
@@ -120,7 +119,7 @@
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/server",
-            "main": "src/main.server.ts",
+            "main": "server.ts",
             "tsConfig": "src/tsconfig.server.json"
           },
           "configurations": {
@@ -134,6 +133,32 @@
               "sourceMap": false,
               "optimization": true
             }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "MisskeyLiveFront:build",
+            "serverTarget": "MisskeyLiveFront:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "MisskeyLiveFront:build:production",
+              "serverTarget": "MisskeyLiveFront:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "MisskeyLiveFront:build:production",
+            "serverTarget": "MisskeyLiveFront:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
           }
         }
       }

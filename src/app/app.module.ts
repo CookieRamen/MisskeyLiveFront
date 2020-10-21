@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -15,8 +14,6 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     NgbCollapseModule
   ],
-
-  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

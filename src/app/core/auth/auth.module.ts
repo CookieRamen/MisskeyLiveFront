@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
-import { CookieService } from 'ngx-cookie-service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -13,7 +12,6 @@ import { HttpClientModule } from '@angular/common/http';
     AuthRoutingModule,
     HttpClientModule
   ],
-  providers: [CookieService]
 })
 export class AuthModule {
 }

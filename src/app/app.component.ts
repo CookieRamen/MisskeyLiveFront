@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { SessionService } from './core/service/session.service';
 import { environment } from '../environments/environment';
-import { CookieService } from 'ngx-cookie-service';
 import { NavigationStart, Router } from '@angular/router';
 
 @Component({
@@ -16,7 +15,6 @@ export class AppComponent {
 
   constructor(
     private sessionService: SessionService,
-    private cookieService: CookieService,
     private router: Router
   ) {
     router.events.subscribe(event => {
@@ -29,7 +27,7 @@ export class AppComponent {
 
   login() {
     const now = location.href;
-    this.cookieService.set('redirect', now, 1, '/');
+    localStorage.setItem('redirect', now);
     location.href = `${environment.api}/api/auth/login`;
   }
 }
