@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { SessionService } from '../service/session.service';
@@ -13,7 +12,6 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private sessionService: SessionService,
-    private cookieService: CookieService,
     private httpClient: HttpClient
   ) {
   }
@@ -21,10 +19,10 @@ export class AuthComponent implements OnInit {
   ngOnInit() {
     this.httpClient.get(`${environment.api}/api/auth/data`, { withCredentials: true })
       .subscribe((data: any) => {
-        this.cookieService.set('live_token', data.i, 60, '/');
+        localStorage.setItem('token', data.i);
         this.sessionService.refresh();
-        const redirect = this.cookieService.get('redirect');
-        this.cookieService.delete('redirect');
+        const redirect = localStorage.getItem('redirect');
+        localStorage.removeItem('redirect');
         location.href = redirect;
       });
   }
