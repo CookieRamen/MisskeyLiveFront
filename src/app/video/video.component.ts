@@ -51,6 +51,13 @@ export class VideoComponent implements OnInit {
         return;
       }
       this.videoId = params.id;
+      this.ogpService.setMetaTag({
+        title: 'MisskeyLive',
+        desc: '',
+        img: '',
+        type: 'article',
+        player: `${environment.api}/embed/archive/${this.videoId}`
+      });
       this.playerInit();
     });
   }
