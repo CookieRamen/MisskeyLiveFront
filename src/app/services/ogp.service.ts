@@ -28,6 +28,12 @@ export class OgpService {
     this.metaService.updateTag({ property: 'og:type', content: data.type });
     this.metaService.updateTag({ property: 'og:image', content: data.img });
     if (data.player) {
+      this.metaService.updateTag({ property: 'og:video:url', content: data.player });
+      this.metaService.updateTag({ property: 'og:video:secure_url', content: data.player });
+      this.metaService.updateTag({ property: 'og:video:type', content: 'text/html' });
+      this.metaService.updateTag({ property: 'og:video:width', content: '1280' });
+      this.metaService.updateTag({ property: 'og:video:height', content: '720' });
+
       this.metaService.updateTag({ property: 'twitter:card', content: 'player' });
       this.metaService.updateTag({ property: 'twitter:player', content: data.player });
       this.metaService.updateTag({ property: 'twitter:width', content: '1280' });
