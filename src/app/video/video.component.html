@@ -1,6 +1,6 @@
 <div class="container my-3">
   <div class="embed-responsive embed-responsive-16by9">
-    <iframe [src]="video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe *ngIf="video" [src]="video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
   <div class="mt-1">
     <h4>{{ videoData?.title }}  <a *ngIf="videoData?.isOwner" [href]="videoData.stream" class="btn btn-primary ml-4">ダウンロード</a>

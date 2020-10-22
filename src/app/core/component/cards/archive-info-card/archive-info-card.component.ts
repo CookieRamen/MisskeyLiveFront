@@ -18,6 +18,7 @@ export class ArchiveInfoCardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.timestamp = this.timestamp ? this.timestamp : '0'
   }
 
   getUnixTime(timestamp: string) {
