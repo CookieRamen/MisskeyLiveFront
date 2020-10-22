@@ -58,6 +58,13 @@ export class LiveComponent implements OnInit, OnDestroy {
         return;
       }
       this.userId = params.id;
+      this.ogpService.setMetaTag({
+        title: `${this.userId}さんのストリーム - MisskeyLive`,
+        desc: '',
+        img: environment.api + '/public/thumbnails/' + this.userId + '.jpg?v=' + Math.floor((new Date().getTime() - 15000) / 60000),
+        type: 'article',
+        player: `${environment.api}/embed/${this.userId}`
+      });
       this.playerInit();
       this.httpClient.get<ArchiveList[]>(`${environment.api}/api/archives/list/${this.userId}`)
         .subscribe(data => {
