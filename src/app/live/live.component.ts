@@ -103,7 +103,8 @@ export class LiveComponent implements OnInit, OnDestroy {
         title: this.userData.title + ' - MisskeyLive',
         desc: this.userData.description,
         img: environment.api + '/public/thumbnails/' + this.userId + '.jpg?v=' + Math.floor((new Date().getTime() - 15000) / 60000),
-        type: 'article'
+        type: 'article',
+        player: `${environment.api}/embed/${this.userId}`
       });
       clearInterval(intervalId);
     });

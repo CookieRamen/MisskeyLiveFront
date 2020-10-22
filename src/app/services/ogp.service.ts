@@ -6,6 +6,7 @@ interface Ogp {
   desc: string;
   img: string;
   type: 'website' | 'article';
+  player?: string
 }
 
 @Injectable({
@@ -26,6 +27,11 @@ export class OgpService {
     this.metaService.updateTag({ property: 'og:description', content: data.desc });
     this.metaService.updateTag({ property: 'og:type', content: data.type });
     this.metaService.updateTag({ property: 'og:image', content: data.img });
-    this.metaService.updateTag({ property: 'twitter:card', content: 'summary' });
+    if (data.player) {
+      this.metaService.updateTag({ property: 'twitter:card', content: 'player' });
+      this.metaService.updateTag({ property: 'twitter:player', content: data.player });
+      this.metaService.updateTag({ property: 'twitter:width', content: '1280' });
+      this.metaService.updateTag({ property: 'twitter:height', content: '720' });
+    }
   }
 }
