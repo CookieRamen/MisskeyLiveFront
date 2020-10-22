@@ -70,7 +70,8 @@ export class VideoComponent implements OnInit {
             title: this.videoData.title + ' - MisskeyLive',
             desc: this.videoData.description,
             img: this.videoData.thumbnail,
-            type: 'article'
+            type: 'article',
+            player: `${environment.api}/embed/archive/${this.videoId}`
           });
           this.httpClient.get<ArchiveList[]>(`${environment.api}/api/archives/list/${data.user}`)
             .subscribe(list => {

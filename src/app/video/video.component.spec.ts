@@ -5,6 +5,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterModule } from '../core/component/footer/footer.module';
 import { MarkdownModule } from 'ngx-markdown';
+import { VideoRoutingModule } from './video-routing.module';
+import { ArchiveInfoCardModule } from '../core/component/cards/archive-info-card/archive-info-card.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('VideoComponent', () => {
   let component: VideoComponent;
@@ -14,8 +17,10 @@ describe('VideoComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpClientModule,
+        VideoRoutingModule,
+        HttpClientTestingModule,
         FooterModule,
+        ArchiveInfoCardModule,
         MarkdownModule.forRoot(),
       ],
       declarations: [VideoComponent]
