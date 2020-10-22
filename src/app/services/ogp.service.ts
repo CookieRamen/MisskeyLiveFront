@@ -36,8 +36,8 @@ export class OgpService {
 
       this.metaService.updateTag({ property: 'twitter:card', content: 'player' });
       this.metaService.updateTag({ property: 'twitter:player', content: data.player });
-      this.metaService.updateTag({ property: 'twitter:width', content: '1280' });
-      this.metaService.updateTag({ property: 'twitter:height', content: '720' });
+      this.metaService.updateTag({ property: 'twitter:player:width', content: '1280' });
+      this.metaService.updateTag({ property: 'twitter:player:height', content: '720' });
     }
   }
 }
