@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to MisskeyLiveFront!');
+    expect(page.getTitleText()).toEqual('MisskeyLiveFront app is running!');
   });
 
   afterEach(async () => {
