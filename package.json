@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:prod": "NODE_ENV=production ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -27,9 +28,9 @@
     "@angular-devkit/build-angular": "~0.1002.0",
     "@angular/cli": "~10.2.0",
     "@angular/compiler-cli": "~10.2.0",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -38,7 +39,13 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "ngx-build-plus": "latest",
+    "ngx-tailwind": "^0.5.1",
+    "postcss-import": "12.0.1",
+    "postcss-loader": "latest",
+    "postcss-scss": "latest",
     "protractor": "~7.0.0",
+    "tailwindcss": "latest",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.0.2"
