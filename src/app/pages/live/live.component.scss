@@ -1,0 +1,4 @@
+.live-container {
+  @apply w-full flex antialiased text-gray-200 bg-gray-900 overflow-hidden;
+  height: calc(100vh - 64px);
+}

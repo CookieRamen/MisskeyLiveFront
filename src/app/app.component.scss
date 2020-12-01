@@ -1,0 +1,24 @@
+nav {
+  .link {
+    @apply ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out;
+    &:hover {
+      @apply text-white bg-gray-700;
+    }
+    &:focus {
+      @apply outline-none text-white bg-gray-700;
+    }
+  }
+  .navbar-popup {
+    @apply py-1 rounded-md bg-white shadow-xs;
+    a {
+      @apply block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out;
+      &:hover {
+        @apply bg-gray-100;
+      }
+      &:focus {
+        @apply outline-none bg-gray-100;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,34 @@
+.live-container {
+  @apply w-full flex bg-gray-800;
+  height: calc(100vh - 64px);
+}
+
+.pizza {
+  @apply col-span-4 flex flex-col items-center;
+  @screen sm {
+    @apply col-span-4;
+  }
+  .price-container {
+    @apply bg-white rounded-lg mt-5;
+  }
+  .image-container {
+    @apply bg-white shadow-lg rounded-lg -mt-4 w-64;
+  }
+}
+
+@screen md {
+  .pizza {
+    @apply col-span-2;
+  }
+}
+@screen lg {
+  .pizza {
+    @apply col-span-1;
+  }
+}
+
+@screen xl {
+  .pizza {
+    @apply col-span-1;
+  }
+}
